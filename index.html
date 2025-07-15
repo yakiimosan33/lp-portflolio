@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Portfolio | LP制作事例</title>
+    <meta name="description" content="Vibe Codingで制作したランディングページのポートフォリオサイト">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="pic/ai-creators-studio.png">
+    <link rel="preload" as="image" href="pic/food-del.png">
+    <link rel="preload" as="image" href="pic/saiz-market.png">
+    <link rel="preload" as="image" href="pic/healthy-life.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Spectral:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <style>
+        @font-face {
+            font-family: 'Objective';
+            src: url('data:font/woff2;base64,') format('woff2');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Objective-bold';
+            src: url('data:font/woff2;base64,') format('woff2');
+            font-weight: 700;
+            font-display: swap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-logo">Vibe Coding</div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">Vibe Coding</a>
+        <a href="#" class="menu-btn">
+            <div class="menu-btn__circles">
+                <span class="menu-btn__circle menu-btn__circle--bottom"></span>
+            </div>
+            <div class="menu-btn__text">About</div>
+        </a>
+        <a href="https://x.com/se_yakiimosan" target="_blank" class="social-link">X</a>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="scroll-container">
+            <div class="scroll-content">
+                <!-- Hero Slide -->
+                <div class="slide slide--first">
+                    <div class="slide__inner">
+                        <h1 class="slide__title">
+                            <span>Feel</span> <span>the</span> <span>Vibe</span>
+                        </h1>
+                        <p class="slide__subtitle">
+                            やきいも / AI Creator<br>
+                            Vibe Coding Portfolio
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Slide 1 -->
+                <div class="slide portfolio-slide">
+                    <div class="slide__inner">
+                        <h2 class="slide__title">AI Creators Studio</h2>
+                        <a href="https://lp-gemini-basic.vercel.app/" target="_blank" class="portfolio-item">
+                            <img src="pic/ai-creators-studio.png" alt="AI Creators Studio" loading="eager">
+                            <div class="portfolio-overlay">
+                                <span>View Site →</span>
+                            </div>
+                        </a>
+                        <div class="slide__project">Corporate Site</div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Slide 2 -->
+                <div class="slide portfolio-slide">
+                    <div class="slide__inner">
+                        <h2 class="slide__title">Food Delivery</h2>
+                        <a href="https://food-delvery-lp.vercel.app/" target="_blank" class="portfolio-item">
+                            <img src="pic/food-del.png" alt="Food Delivery" loading="eager">
+                            <div class="portfolio-overlay">
+                                <span>View Site →</span>
+                            </div>
+                        </a>
+                        <div class="slide__project">Service Landing Page</div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Slide 3 -->
+                <div class="slide portfolio-slide">
+                    <div class="slide__inner">
+                        <h2 class="slide__title">Saize Marketing</h2>
+                        <a href="https://saizeria-lp.vercel.app/" target="_blank" class="portfolio-item">
+                            <img src="pic/saiz-market.png" alt="Saize Marketing" loading="eager">
+                            <div class="portfolio-overlay">
+                                <span>View Site →</span>
+                            </div>
+                        </a>
+                        <div class="slide__project">Restaurant Landing Page</div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Slide 4 -->
+                <div class="slide portfolio-slide">
+                    <div class="slide__inner">
+                        <h2 class="slide__title">Healthy Life</h2>
+                        <a href="https://health-life-tan.vercel.app/" target="_blank" class="portfolio-item">
+                            <img src="pic/healthy-life.png" alt="Healthy Life" loading="eager">
+                            <div class="portfolio-overlay">
+                                <span>View Site →</span>
+                            </div>
+                        </a>
+                        <div class="slide__project">Healthcare Landing Page</div>
+                    </div>
+                </div>
+
+                <!-- Contact Slide -->
+                <div class="slide portfolio-slide">
+                    <div class="slide__inner">
+                        <h2 class="slide__title">Vibe CodingでLP作るには</h2>
+                        <div class="contact-content">
+                            <a href="https://note.com/yakiimo_blog/m/mee95f914c1b7" target="_blank" class="contact-link">
+                                <span class="contact-link-text">Note記事を読む</span>
+                                <span class="contact-link-arrow">→</span>
+                            </a>
+                            <div class="contact-divider"></div>
+                            <p class="contact-subtitle">プロジェクトのご相談はお気軽に</p>
+                            <a href="mailto:yakiimosan33@gmail.com" class="contact-email">yakiimosan33@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollbar -->
+        <div class="scrollbar">
+            <div class="scrollbar__handle"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
