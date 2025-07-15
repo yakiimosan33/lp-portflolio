@@ -311,6 +311,10 @@ body {
     max-width: 600px;
 }
 
+.contact-content .slide__title {
+    white-space: nowrap;
+}
+
 .contact-link {
     display: inline-flex;
     align-items: center;
