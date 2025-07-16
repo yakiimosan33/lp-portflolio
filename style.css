@@ -177,16 +177,17 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 /* Slides */
 .slide {
     height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    min-width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -374,21 +375,21 @@ body {
 /* Scrollbar */
 .scrollbar {
     position: fixed;
-    bottom: 4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 250px;
-    height: 3px;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 250px;
     background: var(--border-color);
     border-radius: 1.5px;
     z-index: 100;
 }
 
 .scrollbar__handle {
-    height: 100%;
+    width: 100%;
     background: var(--primary-color);
     border-radius: 1.5px;
-    transform-origin: left;
+    transform-origin: top;
     transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 

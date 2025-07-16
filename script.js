@@ -100,13 +100,13 @@ let isScrolling = false;
 function updateSlidePosition() {
     const scrollContent = document.querySelector('.scroll-content');
     if (!scrollContent) return;
-    const translateX = -(currentSlide * 100);
-    scrollContent.style.transform = `translateX(${translateX}vw)`;
+    const translateY = -(currentSlide * 100);
+    scrollContent.style.transform = `translateY(${translateY}vh)`;
 
     const scrollbarHandle = document.querySelector('.scrollbar__handle');
     if (!scrollbarHandle) return;
     const progress = totalSlides > 1 ? currentSlide / (totalSlides - 1) : 0;
-    scrollbarHandle.style.transform = `scaleX(${progress})`;
+    scrollbarHandle.style.transform = `scaleY(${progress})`;
 }
 
 function navigate(direction) {
@@ -134,14 +134,14 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate('prev');
 });
 
-let touchStartX = 0;
-document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+let touchStartY = 0;
+document.addEventListener('touchstart', (e) => { touchStartY = e.changedTouches[0].screenY; });
 document.addEventListener('touchend', (e) => {
-    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
     const swipeThreshold = 50;
-    if (touchStartX - touchEndX > swipeThreshold) {
+    if (touchStartY - touchEndY > swipeThreshold) {
         navigate('next');
-    } else if (touchEndX - touchStartX > swipeThreshold) {
+    } else if (touchEndY - touchStartY > swipeThreshold) {
         navigate('prev');
     }
 });
