@@ -192,6 +192,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0 8vw;
+    position: relative;
 }
 
 .slide__inner {
@@ -387,18 +388,26 @@ body {
 
 .scrollbar__handle {
     width: 100%;
+    height: 0; /* Initially 0, will be updated by JS */
     background: var(--primary-color);
     border-radius: 1.5px;
-    transform-origin: top;
-    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: absolute;
+    top: 0;
+    transition: height 1s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.5s ease;
+}
+
+.scrollbar__handle--end {
+    background-color: #28a745; /* Green color for completion */
 }
 
 /* Responsive */
 @media (max-width: 900px) {
     .portfolio-slide .slide__inner {
         flex-direction: column;
-        gap: 4vh;
+        gap: 3vh;
         text-align: center;
+        justify-content: center;
+        align-items: center;
     }
     .portfolio-item {
         width: 80vw;
@@ -425,15 +434,163 @@ body {
     }
     .slide {
         padding: 0 5vw;
+        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slide__inner {
+        height: auto;
+        justify-content: center;
+        align-items: center;
     }
     .slide__title {
-        font-size: clamp(3rem, 10vw, 5rem);
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        margin-bottom: 1.5rem;
     }
     .slide__subtitle {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+        line-height: 1.5;
     }
     .scrollbar {
-        width: 200px;
-        bottom: 2rem;
+        right: 1rem;
+        height: 150px;
+        width: 2px;
+    }
+    .portfolio-item {
+        width: 90vw;
+        height: 40vh;
+        max-width: none;
+    }
+    .portfolio-info h3 {
+        font-size: 2rem;
+    }
+    .portfolio-info p {
+        font-size: 1.4rem;
+    }
+    .contact-content {
+        padding: 0 2rem;
+    }
+    .contact-link {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+    .contact-email {
+        font-size: 1.8rem;
+    }
+}
+
+/* Additional mobile styles for very small screens */
+@media (max-width: 480px) {
+    .slide {
+        padding: 0 4vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .portfolio-slide .slide__inner {
+        height: auto;
+        justify-content: center;
+        gap: 2vh;
+    }
+    .slide__title {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+    .slide__subtitle {
+        font-size: 1.2rem;
+    }
+    .portfolio-item {
+        height: 35vh;
+    }
+    .portfolio-info h3 {
+        font-size: 1.8rem;
+    }
+    .portfolio-info p {
+        font-size: 1.3rem;
+    }
+    .contact-link {
+        font-size: 1.4rem;
+    }
+    .contact-email {
+        font-size: 1.6rem;
+    }
+}
+
+/* Scroll Indicator */
+.slide--first .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+    animation: fadeInUp 2s ease-out;
+}
+
+.scroll-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+}
+
+.scroll-arrow {
+    width: 1px;
+    height: 30px;
+    background: var(--text-color);
+    position: relative;
+    opacity: 0.7;
+    animation: scrollPulse 2s infinite;
+}
+
+.scroll-arrow::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid var(--text-color);
+    opacity: 0.7;
+}
+
+@keyframes scrollPulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Mobile responsive for scroll indicator */
+@media (max-width: 768px) {
+    .slide--first .scroll-indicator {
+        bottom: 1rem;
+    }
+    .scroll-text {
+        font-size: 1rem;
+    }
+    .scroll-arrow {
+        height: 20px;
     }
 }

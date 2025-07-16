@@ -92,6 +92,15 @@ document.addEventListener('DOMContentLoaded', function() {
             cursorOutline.style.backgroundColor = 'rgba(0, 87, 255, 0)'; // Reset to border only
         });
     });
+
+    // --- Email Obfuscation ---
+    const emailLink = document.getElementById('contact-email-link');
+    if (emailLink) {
+        const user = 'yakiimosan33';
+        const domain = 'gmail.com';
+        emailLink.href = `mailto:${user}@${domain}`;
+        emailLink.textContent = `${user}@${domain}`;
+    }
 });
 
 // --- Scrolling and Navigation ---
@@ -106,7 +115,14 @@ function updateSlidePosition() {
     const scrollbarHandle = document.querySelector('.scrollbar__handle');
     if (!scrollbarHandle) return;
     const progress = totalSlides > 1 ? currentSlide / (totalSlides - 1) : 0;
-    scrollbarHandle.style.transform = `scaleY(${progress})`;
+    scrollbarHandle.style.height = `${progress * 100}%`;
+
+    // Change color at the end
+    if (currentSlide === totalSlides - 1) {
+        scrollbarHandle.classList.add('scrollbar__handle--end');
+    } else {
+        scrollbarHandle.classList.remove('scrollbar__handle--end');
+    }
 }
 
 function navigate(direction) {
