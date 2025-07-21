@@ -156,6 +156,111 @@ body {
     color: var(--primary-color);
 }
 
+/* About Section */
+.about-content {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.about-description {
+    margin-top: 3rem;
+}
+
+.about-text {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* About Page */
+.about-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 2rem 5rem;
+}
+
+.about-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Contact Page */
+.contact-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 2rem 5rem;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Active navigation link */
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Header Navigation */
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav-list {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav-item {
+    position: relative;
+}
+
+.nav-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
 
 /* Main Container */
 .main-container {
@@ -219,6 +324,15 @@ body {
     color: var(--secondary-color);
 }
 
+.slide__portfolio-text {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 1rem 0;
+    opacity: 0.9;
+}
+
 .slide__subtitle {
     font-size: 2rem;
     color: var(--text-color);
@@ -229,6 +343,17 @@ body {
 
 .slide--first .slide__subtitle {
     margin-left: 0.5rem;
+}
+
+/* Portfolio Section Title */
+.portfolio-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
 }
 
 /* Portfolio Slides */
@@ -308,13 +433,118 @@ body {
     margin-bottom: 2.5rem;
 }
 
+/* Portfolio Grid Styles */
+.portfolio-grid-slide .slide__inner {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    width: 80vw;
+    max-width: 1200px;
+}
+
+.portfolio-grid-item {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    min-height: 250px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.portfolio-grid-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 87, 255, 0.1);
+}
+
+.portfolio-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.portfolio-grid-item:hover img {
+    transform: scale(1.05);
+}
+
+.portfolio-grid-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 2rem;
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-grid-item:hover .portfolio-grid-overlay {
+    transform: translateY(0);
+}
+
+.grid-project {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.grid-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    display: block;
+}
+
+.portfolio-placeholder {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border: 2px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.portfolio-placeholder:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border-color);
+}
+
+.placeholder-content {
+    text-align: center;
+}
+
+.placeholder-text {
+    font-size: 1.6rem;
+    color: #999;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
 /* Contact Slide */
 .contact-content {
     max-width: 600px;
+    text-align: center;
 }
 
 .contact-content .slide__title {
     white-space: nowrap;
+    text-align: center;
+    width: 100%;
 }
 
 .contact-link {
@@ -427,6 +657,35 @@ body {
     }
     .header {
         padding: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .header-nav-list {
+        gap: 2rem;
+    }
+    
+    .nav-link {
+        font-size: 1.3rem;
+    }
+    
+    .about-text {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-page {
+        padding: 8rem 2rem 3rem;
+    }
+    
+    .contact-page {
+        padding: 8rem 2rem 3rem;
+    }
+    
+    .portfolio-section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        letter-spacing: 0.5px;
     }
     .social-link {
         bottom: 2rem;
@@ -449,6 +708,11 @@ body {
         font-size: clamp(2.5rem, 12vw, 4rem);
         margin-bottom: 1.5rem;
     }
+    .slide__portfolio-text {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+    }
+    
     .slide__subtitle {
         font-size: 1.4rem;
         line-height: 1.5;
@@ -468,6 +732,21 @@ body {
     }
     .portfolio-info p {
         font-size: 1.4rem;
+    }
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        width: 90vw;
+    }
+    .portfolio-grid-item {
+        height: 30vh;
+        min-height: 200px;
+    }
+    .grid-project {
+        font-size: 1rem;
+    }
+    .grid-title {
+        font-size: 1.6rem;
     }
     .contact-content {
         padding: 0 2rem;
@@ -508,6 +787,19 @@ body {
     }
     .portfolio-info p {
         font-size: 1.3rem;
+    }
+    .portfolio-grid-item {
+        height: 25vh;
+        min-height: 180px;
+    }
+    .portfolio-grid-overlay {
+        padding: 1.5rem;
+    }
+    .grid-project {
+        font-size: 0.9rem;
+    }
+    .grid-title {
+        font-size: 1.4rem;
     }
     .contact-link {
         font-size: 1.4rem;

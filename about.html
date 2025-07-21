@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAKIIMO | About - Vibe Coding Portfolio</title>
+    <meta name="description" content="YAKIIMOのプロフィールページ。ITエンジニア14年目、Vibe Coding 100日創作チャレンジの作品を紹介。">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Vibe Coding</a>
+        <nav class="header-nav">
+            <ul class="header-nav-list">
+                <li class="header-nav-item"><a href="index.html#works" class="nav-link">WORKS</a></li>
+                <li class="header-nav-item"><a href="about.html" class="nav-link active">ABOUT</a></li>
+                <li class="header-nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
+            </ul>
+        </nav>
+        <a href="https://x.com/se_yakiimosan" target="_blank" class="social-link">X</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="about-page">
+        <div class="about-container">
+            <div class="about-content">
+                <h1 class="slide__title">YAKIIMO</h1>
+                <div class="about-description">
+                    <p class="about-text">ITエンジニア14年目。Vibe Coding 100日創作チャレンジで創作した作品を紹介。</p>
+                    <p class="about-text">プログラミングは自分の手で実装しないで、どこまでのものが作れるのかをやっています。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Custom Cursor
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-dot-outline');
+
+            document.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursor.style.left = `${posX}px`;
+                cursor.style.top = `${posY}px`;
+                cursorOutline.style.left = `${posX}px`;
+                cursorOutline.style.top = `${posY}px`;
+                if (cursor.style.opacity === '0') {
+                    cursor.style.opacity = '1';
+                    cursorOutline.style.opacity = '1';
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorOutline.style.opacity = '0';
+            });
+
+            // Cursor hover effects
+            const hoverElements = document.querySelectorAll('a, button, .hover-element');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

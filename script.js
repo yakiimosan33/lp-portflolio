@@ -2,6 +2,7 @@
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
+let currentSection = 'hero'; // 'hero', 'about', 'works', 'contact'
 
 // --- Combined DOMContentLoaded Listener ---
 document.addEventListener('DOMContentLoaded', function() {
@@ -101,6 +102,25 @@ document.addEventListener('DOMContentLoaded', function() {
         emailLink.href = `mailto:${user}@${domain}`;
         emailLink.textContent = `${user}@${domain}`;
     }
+
+    // --- Navigation Menu Functionality ---
+    // Add click event listeners to internal navigation links
+    document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = e.target.getAttribute('href');
+            const sectionName = href.replace('#', '');
+            
+            // Navigate to the appropriate slide
+            if (sectionName === 'works') {
+                currentSlide = 0; // Start from Hero slide (Creative with AI)
+                updateSlidePosition();
+            } else {
+                currentSlide = 0; // Hero slide
+                updateSlidePosition();
+            }
+        });
+    });
 });
 
 // --- Scrolling and Navigation ---

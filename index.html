@@ -32,8 +32,15 @@
 
     <!-- Header -->
     <header class="header">
-        <a href="#" class="logo">Vibe Coding</a>
-        <a href="https://x.com/se_yakiimosan" target="_blank" class="social-link">X Profile</a>
+        <a href="#" class="logo" onclick="location.reload()">Vibe Coding</a>
+        <nav class="header-nav">
+            <ul class="header-nav-list">
+                <li class="header-nav-item"><a href="#works" class="nav-link">WORKS</a></li>
+                <li class="header-nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
+                <li class="header-nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
+            </ul>
+        </nav>
+        <a href="https://x.com/se_yakiimosan" target="_blank" class="social-link">X</a>
     </header>
 
     <!-- Main Container -->
@@ -41,9 +48,10 @@
         <div class="scroll-container">
             <div class="scroll-content">
                 <!-- Hero Slide -->
-                <div class="slide slide--first">
+                <div class="slide slide--first slide-hero">
                     <div class="slide__inner">
                         <h1 class="slide__title">Creative with AI</h1>
+                        <p class="slide__portfolio-text">VIBE CODING'S PORTFOLIO SITE.</p>
                         <p class="slide__subtitle">
                             やきいも/AI Creator
                         </p>
@@ -55,86 +63,76 @@
                     </div>
                 </div>
 
-                <!-- Portfolio Slide 1 -->
-                <div class="slide portfolio-slide">
+                <!-- Portfolio Grid Slide -->
+                <div class="slide portfolio-grid-slide" id="works">
                     <div class="slide__inner">
-                        <a href="https://lp-gemini-basic.vercel.app/" target="_blank" class="portfolio-item">
-                            <img src="pic/ai-creators-studio.png" alt="AI Creators Studio">
-                            <div class="portfolio-overlay">
-                                <span>View Site →</span>
-                            </div>
-                        </a>
-                        <div class="portfolio-info">
-                            <div class="slide__project">Corporate Site</div>
-                            <h2 class="slide__title">AI Creators Studio</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Portfolio Slide 2 -->
-                <div class="slide portfolio-slide">
-                    <div class="slide__inner">
-                        <a href="https://food-delvery-lp.vercel.app/" target="_blank" class="portfolio-item">
-                            <img src="pic/food-del.png" alt="Food Delivery">
-                            <div class="portfolio-overlay">
-                                <span>View Site →</span>
-                            </div>
-                        </a>
-                        <div class="portfolio-info">
-                            <div class="slide__project">Service Landing Page</div>
-                            <h2 class="slide__title">Food Delivery</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Portfolio Slide 3 -->
-                <div class="slide portfolio-slide">
-                    <div class="slide__inner">
-                        <a href="https://saizeria-lp.vercel.app/" target="_blank" class="portfolio-item">
-                            <img src="pic/saiz-market.png" alt="Saize Marketing">
-                            <div class="portfolio-overlay">
-                                <span>View Site →</span>
-                            </div>
-                        </a>
-                        <div class="portfolio-info">
-                            <div class="slide__project">Restaurant Landing Page</div>
-                            <h2 class="slide__title">Saize Marketing</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Portfolio Slide 4 -->
-                <div class="slide portfolio-slide">
-                    <div class="slide__inner">
-                        <a href="https://health-life-tan.vercel.app/" target="_blank" class="portfolio-item">
-                            <img src="pic/healthy-life.png" alt="Healthy Life">
-                            <div class="portfolio-overlay">
-                                <span>View Site →</span>
-                            </div>
-                        </a>
-                        <div class="portfolio-info">
-                            <div class="slide__project">Healthcare Landing Page</div>
-                            <h2 class="slide__title">Healthy Life</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Slide -->
-                <div class="slide">
-                    <div class="slide__inner">
-                        <div class="contact-content">
-                            <h2 class="slide__title">Create with AI?</h2>
-                            <p class="slide__subtitle">Vibe Codingを始めたい方は、お気軽にご相談ください。</p>
-                            <a href="https://note.com/yakiimo_blog/m/mee95f914c1b7" target="_blank" class="contact-link">
-                                <span class="contact-link-text">記事を読む</span>
-                                <span class="contact-link-arrow">→</span>
+                        <h2 class="portfolio-section-title">LP（ランディングページ）</h2>
+                        <div class="portfolio-grid">
+                            <a href="https://lp-gemini-basic.vercel.app/" target="_blank" class="portfolio-grid-item">
+                                <img src="pic/ai-creators-studio.png" alt="AI Creators Studio">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-project">LP</span>
+                                    <span class="grid-title">AI Creators Studio</span>
+                                </div>
                             </a>
-                            <div class="contact-divider"></div>
-                            <p class="contact-subtitle">Or email me at</p>
-                            <a id="contact-email-link" class="contact-email" href="#"></a>
+                            <a href="https://food-delvery-lp.vercel.app/" target="_blank" class="portfolio-grid-item">
+                                <img src="pic/food-del.png" alt="Food Delivery">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-project">LP</span>
+                                    <span class="grid-title">Food Delivery</span>
+                                </div>
+                            </a>
+                            <a href="https://saizeria-lp.vercel.app/" target="_blank" class="portfolio-grid-item">
+                                <img src="pic/saiz-market.png" alt="Saize Marketing">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-project">LP</span>
+                                    <span class="grid-title">Saize Marketing</span>
+                                </div>
+                            </a>
+                            <a href="https://health-life-tan.vercel.app/" target="_blank" class="portfolio-grid-item">
+                                <img src="pic/healthy-life.png" alt="Healthy Life">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-project">LP</span>
+                                    <span class="grid-title">Healthy Life</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Store Sites Grid Slide -->
+                <div class="slide portfolio-grid-slide">
+                    <div class="slide__inner">
+                        <h2 class="portfolio-section-title">Store</h2>
+                        <div class="portfolio-grid">
+                            <a href="https://hair-salon-sigma-sand.vercel.app/" target="_blank" class="portfolio-grid-item">
+                                <img src="pic/hair-salon.png" alt="Hair Salon">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-project">店舗サイト</span>
+                                    <span class="grid-title">Hair Salon</span>
+                                </div>
+                            </a>
+                            <a href="https://lp-gemini-basic-esjy.vercel.app/" target="_blank" class="portfolio-grid-item">
+                                <img src="pic/forest-cafe.png" alt="Forest Cafe">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-project">店舗サイト</span>
+                                    <span class="grid-title">Forest Cafe</span>
+                                </div>
+                            </a>
+                            <div class="portfolio-grid-item portfolio-placeholder">
+                                <div class="placeholder-content">
+                                    <span class="placeholder-text">coming soon</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-grid-item portfolio-placeholder">
+                                <div class="placeholder-content">
+                                    <span class="placeholder-text">coming soon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
