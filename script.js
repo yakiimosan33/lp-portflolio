@@ -427,10 +427,14 @@ function navigateToWorksCategory(category) {
                 }
             });
             
-            // Show all items by default
+            // Show all items by default, but limit to 4 on mobile
             const portfolioItems = targetSlide.querySelectorAll('.portfolio-grid-item');
-            portfolioItems.forEach(item => {
-                item.style.display = 'block';
+            portfolioItems.forEach((item, index) => {
+                if (window.innerWidth <= 480 && index >= 4) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
             });
         }
     }, 300);
