@@ -1,11 +1,19 @@
 // Portfolio Variables
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
+let slides;
+let totalSlides;
 let currentSection = 'hero'; // 'hero', 'about', 'works', 'contact'
 
 // --- Combined DOMContentLoaded Listener ---
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize slides after DOM is ready
+    slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+    console.log('DOM loaded - Total slides:', totalSlides); // Debug log
+    
+    // Reset currentSlide to ensure proper initial state
+    currentSlide = 0;
+    
     // --- Loading Screen Logic ---
     const loadingScreen = document.getElementById('loading');
     let loadingFinished = false;
@@ -108,8 +116,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Navigation Menu Functionality ---
     // Function to navigate to a specific section
     function navigateToSection(sectionName) {
+        console.log('navigateToSection called with:', sectionName, 'window.innerWidth:', window.innerWidth); // Debug log
+        
         if (sectionName === 'works') {
-            currentSlide = 1; // Go to first portfolio grid slide
+            // On mobile, go directly to LP section (first portfolio slide)
+            if (window.innerWidth <= 768) {
+                currentSlide = 1; // LP（ランディングページ）slide - first portfolio section
+            } else {
+                currentSlide = 0; // Start from hero on desktop, can scroll to see portfolio
+            }
+            console.log('Navigating to works, currentSlide set to:', currentSlide); // Debug log
             updateSlidePosition();
         } else {
             currentSlide = 0; // Hero slide
@@ -120,14 +136,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if we came from another page with a hash
     if (window.location.hash) {
         const hash = window.location.hash.replace('#', '');
+        console.log('Page loaded with hash:', hash); // Debug log
         // Wait for images to load and transitions to complete
         setTimeout(() => {
+            console.log('Executing hash navigation after 300ms delay'); // Debug log
             navigateToSection(hash);
             // Ensure the view is updated
             if (window.scrollTo) {
                 window.scrollTo(0, 0);
             }
         }, 300);
+    } else {
+        console.log('Page loaded without hash'); // Debug log
     }
 
     // Add click event listeners to internal navigation links
@@ -136,11 +156,33 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const href = e.target.getAttribute('href');
             const sectionName = href.replace('#', '');
+            console.log('Click event - sectionName:', sectionName, 'href:', href); // Debug log
+            
+            // Force reset currentSlide before navigation for mobile
+            if (window.innerWidth <= 768 && sectionName === 'works') {
+                console.log('Mobile works click - forcing currentSlide reset'); // Debug log
+                currentSlide = 0; // Reset to ensure clean state
+            }
+            
             navigateToSection(sectionName);
             // Update URL hash without triggering scroll
             history.pushState(null, null, href);
         });
     });
+});
+
+// --- Page Visibility Handler ---
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        console.log('Page became visible - resetting slide state'); // Debug log
+        // Reset to ensure clean state when page becomes visible
+        if (window.innerWidth <= 768 && window.location.hash === '#works') {
+            currentSlide = 0;
+            setTimeout(() => {
+                navigateToSection('works');
+            }, 100);
+        }
+    }
 });
 
 // --- Scrolling and Navigation ---
@@ -150,11 +192,23 @@ function updateSlidePosition() {
     const scrollContent = document.querySelector('.scroll-content');
     if (!scrollContent) return;
     
+    // Get all slides to verify count
+    const allSlides = document.querySelectorAll('.slide');
+    console.log('Total slides found:', allSlides.length, 'currentSlide:', currentSlide); // Debug log
+    
     // Force a reflow to ensure proper rendering on mobile
     scrollContent.style.transition = 'none';
     void scrollContent.offsetHeight; // Trigger reflow
     
     const translateY = -(currentSlide * 100);
+    console.log('updateSlidePosition - currentSlide:', currentSlide, 'translateY:', translateY, 'vh'); // Debug log
+    
+    // Log which slide should be visible
+    if (allSlides[currentSlide]) {
+        const slideInfo = allSlides[currentSlide].querySelector('.portfolio-section-title');
+        console.log('Current slide should show:', slideInfo ? slideInfo.textContent : 'Hero slide');
+    }
+    
     scrollContent.style.transform = `translateY(${translateY}vh)`;
     
     // Re-enable transitions after a brief delay

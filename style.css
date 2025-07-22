@@ -799,27 +799,27 @@ body {
         font-size: 1.4rem;
     }
     .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
         width: 95vw;
         padding: 0 1rem;
     }
     .portfolio-grid-item {
-        height: 35vh;
-        min-height: 220px;
-        border-radius: 12px;
+        height: 30vh;
+        min-height: 180px;
+        border-radius: 8px;
     }
     .portfolio-grid-overlay {
-        padding: 1.5rem;
+        padding: 1rem;
         background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     }
     .grid-project {
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
     }
     .grid-title {
-        font-size: 1.5rem;
-        line-height: 1.3;
+        font-size: 1.2rem;
+        line-height: 1.2;
     }
     .placeholder-text {
         font-size: 1.4rem;
@@ -887,6 +887,30 @@ body {
         align-items: center;
         justify-content: center;
     }
+    
+    .portfolio-grid {
+        gap: 1rem;
+        width: 100vw;
+        padding: 0 0.5rem;
+    }
+    
+    .portfolio-grid-item {
+        height: 25vh;
+        min-height: 150px;
+        border-radius: 6px;
+    }
+    
+    .portfolio-grid-overlay {
+        padding: 0.8rem;
+    }
+    
+    .grid-project {
+        font-size: 0.7rem;
+    }
+    
+    .grid-title {
+        font-size: 1rem;
+    }
     .portfolio-slide .slide__inner {
         height: auto;
         justify-content: center;
@@ -924,14 +948,23 @@ body {
         font-size: 1.4rem;
         padding: 1rem 2rem;
         border-radius: 8px;
-        background: rgba(0, 87, 255, 0.05);
-        border: 1px solid rgba(0, 87, 255, 0.2);
+        background: var(--primary-color);
+        color: var(--light-color);
+        border: 1px solid var(--primary-color);
         margin: 1.5rem 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         width: auto;
         min-width: 200px;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-link:hover {
+        background: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 87, 255, 0.3);
     }
     
     .contact-email {
