@@ -1051,32 +1051,33 @@ body {
     }
     
     .portfolio-grid-item {
-        aspect-ratio: 4/3;
-        height: auto;
-        min-height: 150px;
-        border-radius: 8px;
+        aspect-ratio: 1;
+        height: 35vh;
+        max-height: 160px;
+        border-radius: 6px;
     }
     
     .portfolio-grid-overlay {
-        padding: 0.8rem;
+        padding: 0.5rem;
     }
     
     .grid-project {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
     }
     
     .grid-title {
-        font-size: 1rem;
+        font-size: 0.8rem;
+        line-height: 1.2;
     }
     
     .grid-tags {
-        gap: 0.3rem;
-        margin-top: 0.5rem;
+        gap: 0.2rem;
+        margin-top: 0.3rem;
     }
     
     .tag {
-        font-size: 0.65rem;
-        padding: 0.15rem 0.4rem;
+        font-size: 0.55rem;
+        padding: 0.1rem 0.3rem;
         margin: 1px;
     }
     
