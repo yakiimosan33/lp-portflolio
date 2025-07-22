@@ -68,75 +68,168 @@
                     </div>
                 </div>
 
-                <!-- Portfolio Grid Slide -->
+                <!-- Webサイト Grid Slide -->
                 <div class="slide portfolio-grid-slide" id="works">
                     <div class="slide__inner">
-                        <h2 class="portfolio-section-title">LP（ランディングページ）</h2>
+                        <h2 class="portfolio-section-title">Webサイト</h2>
+                        <!-- Filter Tags -->
+                        <div class="filter-tags" data-category="website">
+                            <button class="filter-tag active" data-filter="all">すべて</button>
+                            <button class="filter-tag" data-filter="lp">#LP</button>
+                            <button class="filter-tag" data-filter="store">#店舗サイト</button>
+                            <button class="filter-tag" data-filter="tech">#テック</button>
+                            <button class="filter-tag" data-filter="food">#食品</button>
+                            <button class="filter-tag" data-filter="beauty">#美容</button>
+                            <button class="filter-tag" data-filter="health">#ヘルスケア</button>
+                        </div>
                         <div class="portfolio-grid">
-                            <a href="https://lp-gemini-basic.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item">
+                            <a href="https://lp-gemini-basic.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="lp tech">
                                 <img src="pic/ai-creators-studio.png" alt="AI Creators Studio">
                                 <div class="portfolio-grid-overlay">
-                                    <span class="grid-project">LP</span>
                                     <span class="grid-title">AI Creators Studio</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#LP</span>
+                                        <span class="tag">#テック</span>
+                                        <span class="tag">#AI</span>
+                                    </div>
                                 </div>
                             </a>
-                            <a href="https://food-delvery-lp.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item">
+                            <a href="https://food-delvery-lp.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="lp food">
                                 <img src="pic/food-del.png" alt="Food Delivery">
                                 <div class="portfolio-grid-overlay">
-                                    <span class="grid-project">LP</span>
                                     <span class="grid-title">Food Delivery</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#LP</span>
+                                        <span class="tag">#食品</span>
+                                        <span class="tag">#デリバリー</span>
+                                    </div>
                                 </div>
                             </a>
-                            <a href="https://saizeria-lp.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item">
+                            <a href="https://saizeria-lp.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="lp food">
                                 <img src="pic/saiz-market.png" alt="Saize Marketing">
                                 <div class="portfolio-grid-overlay">
-                                    <span class="grid-project">LP</span>
                                     <span class="grid-title">Saize Marketing</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#LP</span>
+                                        <span class="tag">#食品</span>
+                                        <span class="tag">#マーケティング</span>
+                                    </div>
                                 </div>
                             </a>
-                            <a href="https://health-life-tan.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item">
+                            <a href="https://health-life-tan.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="lp health">
                                 <img src="pic/healthy-life.png" alt="Healthy Life">
                                 <div class="portfolio-grid-overlay">
-                                    <span class="grid-project">LP</span>
                                     <span class="grid-title">Healthy Life</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#LP</span>
+                                        <span class="tag">#ヘルスケア</span>
+                                        <span class="tag">#ライフスタイル</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://hair-salon-sigma-sand.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="store beauty">
+                                <img src="pic/hair-salon.png" alt="Hair Salon">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-title">Hair Salon</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#店舗サイト</span>
+                                        <span class="tag">#美容</span>
+                                        <span class="tag">#予約システム</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://lp-gemini-basic-esjy.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="store food">
+                                <img src="pic/forest-cafe.png" alt="Forest Cafe">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-title">Forest Cafe</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#店舗サイト</span>
+                                        <span class="tag">#飲食</span>
+                                        <span class="tag">#カフェ</span>
+                                    </div>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Store Sites Grid Slide -->
+                <!-- Webアプリ Grid Slide -->
                 <div class="slide portfolio-grid-slide">
                     <div class="slide__inner">
-                        <h2 class="portfolio-section-title">Store（店舗サイト）</h2>
+                        <h2 class="portfolio-section-title">Webアプリ</h2>
+                        <!-- Filter Tags -->
+                        <div class="filter-tags" data-category="webapp">
+                            <button class="filter-tag active" data-filter="all">すべて</button>
+                            <button class="filter-tag" data-filter="ai">#AI連携</button>
+                            <button class="filter-tag" data-filter="api">#API</button>
+                            <button class="filter-tag" data-filter="automation">#自動化</button>
+                            <button class="filter-tag" data-filter="database">#DB連携</button>
+                            <button class="filter-tag" data-filter="analysis">#分析</button>
+                        </div>
                         <div class="portfolio-grid">
-                            <a href="https://hair-salon-sigma-sand.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item">
-                                <img src="pic/hair-salon.png" alt="Hair Salon">
+                            <a href="https://samne-makaer.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="ai automation api">
+                                <img src="pic/samnail.png" alt="サムネイル制作サポートくん">
                                 <div class="portfolio-grid-overlay">
-                                    <span class="grid-project">店舗サイト</span>
-                                    <span class="grid-title">Hair Salon</span>
+                                    <span class="grid-title">サムネイル制作サポートくん</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#AI連携</span>
+                                        <span class="tag">#自動化</span>
+                                        <span class="tag">#API</span>
+                                        <span class="tag">#画像生成</span>
+                                    </div>
                                 </div>
                             </a>
-                            <a href="https://lp-gemini-basic-esjy.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item">
-                                <img src="pic/forest-cafe.png" alt="Forest Cafe">
-                                <div class="portfolio-grid-overlay">
-                                    <span class="grid-project">店舗サイト</span>
-                                    <span class="grid-title">Forest Cafe</span>
-                                </div>
-                            </a>
-                            <div class="portfolio-grid-item portfolio-placeholder">
+                            <div class="portfolio-grid-item portfolio-placeholder" data-tags="database management">
                                 <div class="placeholder-content">
-                                    <span class="placeholder-text">coming soon</span>
+                                    <span class="placeholder-text">データ管理システム</span>
+                                    <span class="placeholder-subtext">coming soon</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#DB連携</span>
+                                        <span class="tag">#管理画面</span>
+                                        <span class="tag">#CRUD</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="portfolio-grid-item portfolio-placeholder">
+                            <div class="portfolio-grid-item portfolio-placeholder" data-tags="automation api">
                                 <div class="placeholder-content">
-                                    <span class="placeholder-text">coming soon</span>
+                                    <span class="placeholder-text">業務自動化ツール</span>
+                                    <span class="placeholder-subtext">coming soon</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#自動化</span>
+                                        <span class="tag">#API</span>
+                                        <span class="tag">#ワークフロー</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-grid-item portfolio-placeholder" data-tags="analysis realtime">
+                                <div class="placeholder-content">
+                                    <span class="placeholder-text">リアルタイム分析</span>
+                                    <span class="placeholder-subtext">coming soon</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#分析</span>
+                                        <span class="tag">#リアルタイム</span>
+                                        <span class="tag">#ダッシュボード</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- 将来的な3分類目の追加用プレースホルダー -->
+                <!-- 
+                <div class="slide portfolio-grid-slide">
+                    <div class="slide__inner">
+                        <h2 class="portfolio-section-title">新カテゴリ名</h2>
+                        <div class="filter-tags" data-category="newcategory">
+                            <button class="filter-tag active" data-filter="all">すべて</button>
+                        </div>
+                        <div class="portfolio-grid">
+                            プロジェクトアイテムをここに追加
+                        </div>
+                    </div>
+                </div>
+                -->
 
             </div>
         </div>

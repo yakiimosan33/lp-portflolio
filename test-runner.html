@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポートフォリオサイト テストランナー</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #333;
+            margin-bottom: 20px;
+        }
+        .test-results {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .pass { color: #4CAF50; }
+        .fail { color: #f44336; }
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #333;
+            border-radius: 5px;
+        }
+        button {
+            background: #0057FF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background: #0045CC;
+        }
+    </style>
+</head>
+<body>
+    <h1>ポートフォリオサイト テストランナー</h1>
+    
+    <button onclick="runTests()">テストを実行</button>
+    
+    <iframe id="testFrame" src="index.html"></iframe>
+    
+    <div class="test-results">
+        <h2>テスト結果</h2>
+        <pre id="testOutput">テストを実行してください...</pre>
+    </div>
+    
+    <script>
+        function runTests() {
+            const iframe = document.getElementById('testFrame');
+            const testOutput = document.getElementById('testOutput');
+            
+            // iframeの再読み込み
+            iframe.src = iframe.src;
+            
+            iframe.onload = function() {
+                setTimeout(() => {
+                    // テストスクリプトをiframe内で実行
+                    const testScript = iframe.contentWindow.document.createElement('script');
+                    testScript.src = 'test-automation.js';
+                    iframe.contentWindow.document.body.appendChild(testScript);
+                    
+                    // 結果を取得して表示
+                    setTimeout(() => {
+                        const results = iframe.contentWindow.testResults;
+                        if (results) {
+                            let output = '';
+                            results.tests.forEach(test => {
+                                const icon = test.status === 'PASS' ? '✅' : '❌';
+                                const className = test.status === 'PASS' ? 'pass' : 'fail';
+                                output += `<span class="${className}">${icon} ${test.name}</span>\n`;
+                            });
+                            
+                            output += `\n<div class="summary">`;
+                            output += `<strong>テスト結果サマリー</strong>\n`;
+                            output += `総テスト数: ${results.passed + results.failed}\n`;
+                            output += `<span class="pass">✅ 成功: ${results.passed}</span>\n`;
+                            output += `<span class="fail">❌ 失敗: ${results.failed}</span>\n`;
+                            output += `成功率: ${((results.passed / (results.passed + results.failed)) * 100).toFixed(1)}%`;
+                            output += `</div>`;
+                            
+                            testOutput.innerHTML = output;
+                        }
+                    }, 1000);
+                }, 2000); // ページ読み込み完了を待つ
+            };
+        }
+    </script>
+</body>
+</html>

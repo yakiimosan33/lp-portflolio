@@ -36,6 +36,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Failsafe: Hide loading screen after 3 seconds anyway
     setTimeout(hideLoadingScreen, 3000);
 
+    // --- Tag Filter Functionality ---
+    const filterButtons = document.querySelectorAll('.filter-tag');
+    const portfolioItems = document.querySelectorAll('.portfolio-grid-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            const category = this.closest('.filter-tags').getAttribute('data-category');
+            
+            // Update active button
+            this.closest('.filter-tags').querySelectorAll('.filter-tag').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Filter items
+            portfolioItems.forEach(item => {
+                // Only filter items in the same section
+                if (item.closest('.slide').querySelector(`.filter-tags[data-category="${category}"]`)) {
+                    if (filter === 'all') {
+                        item.classList.remove('hidden');
+                    } else {
+                        const tags = item.getAttribute('data-tags');
+                        if (tags && tags.includes(filter)) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    }
+                }
+            });
+        });
+    });
+
 
     // --- Custom Cursor ---
     const cursor = document.querySelector('.cursor-dot');

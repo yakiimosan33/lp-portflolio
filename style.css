@@ -451,10 +451,35 @@ body {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    width: 80vw;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 85vw;
     max-width: 1200px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+    /* iOS Safari スムーズスクロール */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* スクロールバーのスタイリング（Webkit） */
+.portfolio-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.portfolio-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.portfolio-grid::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.portfolio-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
 
 .portfolio-grid-item {
@@ -467,6 +492,9 @@ body {
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     text-decoration: none;
+    /* タッチデバイス対応 */
+    -webkit-tap-highlight-color: rgba(0, 87, 255, 0.2);
+    touch-action: manipulation;
 }
 
 .portfolio-grid-item:hover {
@@ -542,6 +570,120 @@ body {
     color: #999;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+}
+
+.placeholder-subtext {
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+/* Tag Styles */
+.grid-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.tag {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+.portfolio-placeholder .grid-tags {
+    margin-top: 1.5rem;
+}
+
+.portfolio-placeholder .tag {
+    background: rgba(0, 87, 255, 0.1);
+    border: 1px solid rgba(0, 87, 255, 0.2);
+    color: var(--primary-color);
+}
+
+/* Tag Color System */
+.tag.tech {
+    background: #3b82f6;
+    border-color: #2563eb;
+}
+
+.tag.industry {
+    background: #10b981;
+    border-color: #059669;
+}
+
+.tag.function {
+    background: #8b5cf6;
+    border-color: #7c3aed;
+}
+
+.tag.feature {
+    background: #f59e0b;
+    border-color: #d97706;
+}
+
+.tag.type {
+    background: #ec4899;
+    border-color: #db2777;
+}
+
+/* Filter Tags */
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+}
+
+.filter-tag {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.6rem;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    /* タッチデバイス対応 */
+    min-height: 44px;
+    -webkit-tap-highlight-color: rgba(0, 87, 255, 0.3);
+    touch-action: manipulation;
+}
+
+.filter-tag:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.filter-tag.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+.portfolio-grid-item {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-grid-item.hidden {
+    display: none;
 }
 
 /* Contact Slide */
@@ -698,6 +840,13 @@ body {
         background: rgba(0, 87, 255, 0.05);
         border: 1px solid rgba(0, 87, 255, 0.1);
         transition: all 0.3s ease;
+        /* タッチデバイス対応 */
+        min-height: 44px;
+        -webkit-tap-highlight-color: rgba(0, 87, 255, 0.3);
+        touch-action: manipulation;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .nav-link:hover, .nav-link.active {
@@ -889,9 +1038,11 @@ body {
     }
     
     .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1rem;
-        width: 100vw;
+        width: 95vw;
         padding: 0 0.5rem;
+        max-height: 60vh;
     }
     
     .portfolio-grid-item {
@@ -910,6 +1061,26 @@ body {
     
     .grid-title {
         font-size: 1rem;
+    }
+    
+    .grid-tags {
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+    }
+    
+    .tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    .filter-tags {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-tag {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
     }
     .portfolio-slide .slide__inner {
         height: auto;
@@ -931,6 +1102,14 @@ body {
     .portfolio-info p {
         font-size: 1.3rem;
     }
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        width: 98vw;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+    
     .portfolio-grid-item {
         height: 25vh;
         min-height: 180px;
@@ -943,6 +1122,14 @@ body {
     }
     .grid-title {
         font-size: 1.4rem;
+    }
+    
+    .placeholder-text {
+        font-size: 1.2rem;
+    }
+    
+    .placeholder-subtext {
+        font-size: 1rem;
     }
     .contact-link {
         font-size: 1.4rem;

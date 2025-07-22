@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レイアウト案 デモ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .demo-section {
+            margin-bottom: 60px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #0057FF;
+            margin-bottom: 20px;
+        }
+        
+        /* 案1: 動的グリッド */
+        .grid-dynamic {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        /* 案2: 3カラムグリッド */
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        /* 案3: カルーセル */
+        .carousel-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            display: flex;
+            gap: 20px;
+            padding: 10px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carousel-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .carousel-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: #0057FF;
+            border-radius: 4px;
+        }
+        .carousel-item {
+            flex: 0 0 calc(50% - 10px);
+            scroll-snap-align: start;
+        }
+        
+        /* 共通アイテムスタイル */
+        .portfolio-item {
+            background: #0057FF;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .grid-3col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .carousel-item {
+                flex: 0 0 80%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-dynamic {
+                grid-template-columns: 1fr;
+            }
+            .grid-3col {
+                grid-template-columns: 1fr;
+            }
+            .carousel-item {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ポートフォリオ レイアウト案デモ</h1>
+    
+    <div class="demo-section">
+        <h2>案1: 動的グリッドシステム（推奨）</h2>
+        <p>アイテム数に応じて自動的にカラム数が調整されます</p>
+        <div class="grid-dynamic">
+            <div class="portfolio-item">作品1</div>
+            <div class="portfolio-item">作品2</div>
+            <div class="portfolio-item">作品3</div>
+            <div class="portfolio-item">作品4</div>
+            <div class="portfolio-item">作品5</div>
+            <div class="portfolio-item">作品6</div>
+            <div class="portfolio-item">作品7</div>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>案2: 3カラムグリッド</h2>
+        <p>常に3列で表示（モバイルは2列→1列）</p>
+        <div class="grid-3col">
+            <div class="portfolio-item">作品1</div>
+            <div class="portfolio-item">作品2</div>
+            <div class="portfolio-item">作品3</div>
+            <div class="portfolio-item">作品4</div>
+            <div class="portfolio-item">作品5</div>
+            <div class="portfolio-item">作品6</div>
+            <div class="portfolio-item">作品7</div>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>案3: カルーセル/スライダー方式</h2>
+        <p>横スクロールで全アイテムを閲覧（スクロールバー付き）</p>
+        <div class="carousel-container">
+            <div class="carousel-item">
+                <div class="portfolio-item">作品1</div>
+            </div>
+            <div class="carousel-item">
+                <div class="portfolio-item">作品2</div>
+            </div>
+            <div class="carousel-item">
+                <div class="portfolio-item">作品3</div>
+            </div>
+            <div class="carousel-item">
+                <div class="portfolio-item">作品4</div>
+            </div>
+            <div class="carousel-item">
+                <div class="portfolio-item">作品5</div>
+            </div>
+            <div class="carousel-item">
+                <div class="portfolio-item">作品6</div>
+            </div>
+            <div class="carousel-item">
+                <div class="portfolio-item">作品7</div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+        <h3>推奨事項</h3>
+        <ul>
+            <li><strong>5-8個のアイテム</strong>：案1（動的グリッド）が最適</li>
+            <li><strong>9個以上のアイテム</strong>：案3（カルーセル）または案2（3カラム）を検討</li>
+            <li><strong>モバイル対応</strong>：全案でレスポンシブ対応済み</li>
+        </ul>
+    </div>
+</body>
+</html>
