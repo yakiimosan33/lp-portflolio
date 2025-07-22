@@ -261,6 +261,19 @@ body {
 
 .dropdown-trigger {
     font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-trigger:hover {
+    background: rgba(87, 157, 255, 0.05);
+}
+
+.dropdown.open .dropdown-trigger {
+    color: var(--primary-color);
 }
 
 .dropdown-menu {
@@ -282,7 +295,8 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.dropdown:hover .dropdown-menu {
+/* Dropdown open state - controlled by JavaScript */
+.dropdown.open .dropdown-menu {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;

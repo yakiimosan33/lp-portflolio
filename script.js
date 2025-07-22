@@ -368,45 +368,40 @@ document.addEventListener('touchend', (e) => {
 document.addEventListener('DOMContentLoaded', function() {
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     const dropdown = document.querySelector('.dropdown');
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
     const dropdownMenu = document.querySelector('.dropdown-menu');
     
+    // Toggle dropdown on click
+    dropdownTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+    });
+    
+    // Handle dropdown item selection
     dropdownItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             const category = this.getAttribute('data-category');
             navigateToWorksCategory(category);
             
-            // Hide dropdown on mobile after selection
-            if (window.innerWidth <= 768) {
-                dropdownMenu.style.opacity = '0';
-                dropdownMenu.style.visibility = 'hidden';
-            }
+            // Close dropdown after selection
+            dropdown.classList.remove('open');
         });
     });
     
-    // Mobile touch support for dropdown
-    if (window.innerWidth <= 768) {
-        dropdown.addEventListener('click', function(e) {
-            e.preventDefault();
-            const isVisible = dropdownMenu.style.visibility === 'visible';
-            
-            if (isVisible) {
-                dropdownMenu.style.opacity = '0';
-                dropdownMenu.style.visibility = 'hidden';
-            } else {
-                dropdownMenu.style.opacity = '1';
-                dropdownMenu.style.visibility = 'visible';
-            }
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!dropdown.contains(e.target)) {
-                dropdownMenu.style.opacity = '0';
-                dropdownMenu.style.visibility = 'hidden';
-            }
-        });
-    }
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
+    
+    // Close dropdown on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && dropdown.classList.contains('open')) {
+            dropdown.classList.remove('open');
+        }
+    });
 });
 
 function navigateToWorksCategory(category) {
