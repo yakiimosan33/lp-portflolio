@@ -106,21 +106,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Navigation Menu Functionality ---
+    // Function to navigate to a specific section
+    function navigateToSection(sectionName) {
+        if (sectionName === 'works') {
+            currentSlide = 1; // Go to first portfolio grid slide
+            updateSlidePosition();
+        } else {
+            currentSlide = 0; // Hero slide
+            updateSlidePosition();
+        }
+    }
+
+    // Check if we came from another page with a hash
+    if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '');
+        // Wait for images to load and transitions to complete
+        setTimeout(() => {
+            navigateToSection(hash);
+            // Ensure the view is updated
+            if (window.scrollTo) {
+                window.scrollTo(0, 0);
+            }
+        }, 300);
+    }
+
     // Add click event listeners to internal navigation links
     document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const href = e.target.getAttribute('href');
             const sectionName = href.replace('#', '');
-            
-            // Navigate to the appropriate slide
-            if (sectionName === 'works') {
-                currentSlide = 0; // Start from Hero slide (Creative with AI)
-                updateSlidePosition();
-            } else {
-                currentSlide = 0; // Hero slide
-                updateSlidePosition();
-            }
+            navigateToSection(sectionName);
+            // Update URL hash without triggering scroll
+            history.pushState(null, null, href);
         });
     });
 });
@@ -131,8 +149,18 @@ let isScrolling = false;
 function updateSlidePosition() {
     const scrollContent = document.querySelector('.scroll-content');
     if (!scrollContent) return;
+    
+    // Force a reflow to ensure proper rendering on mobile
+    scrollContent.style.transition = 'none';
+    void scrollContent.offsetHeight; // Trigger reflow
+    
     const translateY = -(currentSlide * 100);
     scrollContent.style.transform = `translateY(${translateY}vh)`;
+    
+    // Re-enable transitions after a brief delay
+    setTimeout(() => {
+        scrollContent.style.transition = '';
+    }, 50);
 
     const scrollbarHandle = document.querySelector('.scrollbar__handle');
     if (!scrollbarHandle) return;

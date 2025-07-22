@@ -737,6 +737,11 @@ body {
         padding-top: 12rem;
     }
     
+    /* Fix for hash navigation on mobile */
+    html {
+        scroll-behavior: auto;
+    }
+    
     .slide {
         padding: 2rem 1rem;
         min-height: calc(100vh - 12rem);
