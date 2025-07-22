@@ -363,3 +363,80 @@ document.addEventListener('touchend', (e) => {
         navigate('prev');
     }
 });
+
+// Dropdown Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            navigateToWorksCategory(category);
+            
+            // Hide dropdown on mobile after selection
+            if (window.innerWidth <= 768) {
+                dropdownMenu.style.opacity = '0';
+                dropdownMenu.style.visibility = 'hidden';
+            }
+        });
+    });
+    
+    // Mobile touch support for dropdown
+    if (window.innerWidth <= 768) {
+        dropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            const isVisible = dropdownMenu.style.visibility === 'visible';
+            
+            if (isVisible) {
+                dropdownMenu.style.opacity = '0';
+                dropdownMenu.style.visibility = 'hidden';
+            } else {
+                dropdownMenu.style.opacity = '1';
+                dropdownMenu.style.visibility = 'visible';
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!dropdown.contains(e.target)) {
+                dropdownMenu.style.opacity = '0';
+                dropdownMenu.style.visibility = 'hidden';
+            }
+        });
+    }
+});
+
+function navigateToWorksCategory(category) {
+    // Navigate to works section first
+    if (category === 'website') {
+        currentSlide = 1; // Webサイト slide
+    } else if (category === 'webapp') {
+        currentSlide = 2; // Webアプリ slide  
+    }
+    
+    updateSlidePosition();
+    currentSection = 'works';
+    
+    // Update active filter after navigation
+    setTimeout(() => {
+        const targetSlide = slides[currentSlide];
+        if (targetSlide) {
+            const filterTags = targetSlide.querySelectorAll('.filter-tag');
+            filterTags.forEach(tag => {
+                tag.classList.remove('active');
+                if (tag.getAttribute('data-filter') === 'all') {
+                    tag.classList.add('active');
+                }
+            });
+            
+            // Show all items by default
+            const portfolioItems = targetSlide.querySelectorAll('.portfolio-grid-item');
+            portfolioItems.forEach(item => {
+                item.style.display = 'block';
+            });
+        }
+    }, 300);
+}

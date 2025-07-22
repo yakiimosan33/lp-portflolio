@@ -40,7 +40,13 @@
         <a href="#" class="logo" onclick="location.reload()">Vibe Coding</a>
         <nav class="header-nav">
             <ul class="header-nav-list">
-                <li class="header-nav-item"><a href="#works" class="nav-link">WORKS</a></li>
+                <li class="header-nav-item dropdown">
+                    <a href="#works" class="nav-link dropdown-trigger">WORKS ▼</a>
+                    <div class="dropdown-menu">
+                        <a href="#works" class="dropdown-item" data-category="website">Webサイト</a>
+                        <a href="#works" class="dropdown-item" data-category="webapp">Webアプリ</a>
+                    </div>
+                </li>
                 <li class="header-nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
                 <li class="header-nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
             </ul>
