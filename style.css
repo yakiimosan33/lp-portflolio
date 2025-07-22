@@ -1038,17 +1038,18 @@ body {
     }
     
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
         width: 95vw;
         padding: 0 0.5rem;
-        max-height: 60vh;
+        max-height: none;
     }
     
     .portfolio-grid-item {
-        height: 25vh;
-        min-height: 150px;
-        border-radius: 6px;
+        aspect-ratio: 4/3;
+        height: auto;
+        min-height: 120px;
+        border-radius: 8px;
     }
     
     .portfolio-grid-overlay {
@@ -1069,8 +1070,9 @@ body {
     }
     
     .tag {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.5rem;
+        font-size: 0.65rem;
+        padding: 0.15rem 0.4rem;
+        margin: 1px;
     }
     
     .filter-tags {
@@ -1103,25 +1105,27 @@ body {
         font-size: 1.3rem;
     }
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
         width: 98vw;
-        max-height: 50vh;
-        overflow-y: auto;
+        max-height: none;
+        overflow-y: visible;
     }
     
     .portfolio-grid-item {
-        height: 25vh;
-        min-height: 180px;
+        aspect-ratio: 4/3;
+        height: auto;
+        min-height: 100px;
     }
     .portfolio-grid-overlay {
-        padding: 1.5rem;
+        padding: 1rem;
     }
     .grid-project {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
     .grid-title {
-        font-size: 1.4rem;
+        font-size: 1rem;
+        line-height: 1.2;
     }
     
     .placeholder-text {

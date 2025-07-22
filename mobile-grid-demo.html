@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スマホグリッドレイアウト案</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #0057FF;
+            margin-bottom: 20px;
+        }
+        
+        .device-frame {
+            width: 375px;
+            max-width: 100%;
+            margin: 0 auto;
+            border: 3px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            padding: 10px;
+        }
+        
+        .screen {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            min-height: 600px;
+            padding: 20px 15px;
+        }
+        
+        /* 案1: 2列グリッド（大きめ画像） */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        /* 案2: 3列グリッド（Instagram風） */
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        /* 案3: ミックスレイアウト */
+        .grid-mixed {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .grid-mixed .item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        
+        /* 案4: カード型2列 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .portfolio-item {
+            background: #0057FF;
+            border-radius: 8px;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-item.tall {
+            aspect-ratio: 4/5;
+        }
+        
+        .portfolio-item.wide {
+            aspect-ratio: 16/9;
+        }
+        
+        .portfolio-item.square {
+            aspect-ratio: 1/1;
+        }
+        
+        .card-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .card-image {
+            background: #0057FF;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            padding: 12px;
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .card-tag {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        /* フィルター */
+        .mobile-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        
+        .mobile-filter {
+            background: #f0f0f0;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .mobile-filter.active {
+            background: #0057FF;
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            .device-frame {
+                border: none;
+                padding: 0;
+                background: transparent;
+            }
+            
+            .screen {
+                border-radius: 0;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>📱 スマホ向けグリッドレイアウト案</h1>
+    
+    <div class="demo-section">
+        <h2>案1: 2列グリッド（推奨）</h2>
+        <p>✅ 画像が大きく見やすい / ❌ 一覧性がやや低い</p>
+        <div class="device-frame">
+            <div class="screen">
+                <div class="section-title">Webサイト</div>
+                <div class="mobile-filters">
+                    <button class="mobile-filter active">すべて</button>
+                    <button class="mobile-filter">#LP</button>
+                    <button class="mobile-filter">#店舗</button>
+                    <button class="mobile-filter">#テック</button>
+                </div>
+                <div class="grid-2col">
+                    <div class="portfolio-item">AI Studio</div>
+                    <div class="portfolio-item">Food Delivery</div>
+                    <div class="portfolio-item">Saize Marketing</div>
+                    <div class="portfolio-item">Healthy Life</div>
+                    <div class="portfolio-item">Hair Salon</div>
+                    <div class="portfolio-item">Forest Cafe</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>案2: 3列グリッド（Instagram風）</h2>
+        <p>✅ 一覧性が高い / ❌ 画像が小さい</p>
+        <div class="device-frame">
+            <div class="screen">
+                <div class="section-title">Webサイト</div>
+                <div class="mobile-filters">
+                    <button class="mobile-filter active">すべて</button>
+                    <button class="mobile-filter">#LP</button>
+                    <button class="mobile-filter">#店舗</button>
+                </div>
+                <div class="grid-3col">
+                    <div class="portfolio-item square">AI Studio</div>
+                    <div class="portfolio-item square">Food Del</div>
+                    <div class="portfolio-item square">Saize</div>
+                    <div class="portfolio-item square">Healthy</div>
+                    <div class="portfolio-item square">Hair</div>
+                    <div class="portfolio-item square">Cafe</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>案3: ミックスレイアウト</h2>
+        <p>✅ 視覚的に魅力的 / ❌ 複雑</p>
+        <div class="device-frame">
+            <div class="screen">
+                <div class="section-title">Webサイト</div>
+                <div class="grid-mixed">
+                    <div class="portfolio-item item">Featured Project</div>
+                    <div class="portfolio-item square item">Project 2</div>
+                    <div class="portfolio-item square item">Project 3</div>
+                    <div class="portfolio-item square item">Project 4</div>
+                    <div class="portfolio-item square item">Project 5</div>
+                    <div class="portfolio-item square item">Project 6</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-section">
+        <h2>案4: カード型2列</h2>
+        <p>✅ 情報量が多い / ❌ 縦スクロールが長い</p>
+        <div class="device-frame">
+            <div class="screen">
+                <div class="section-title">Webサイト</div>
+                <div class="grid-cards">
+                    <div class="card-item">
+                        <div class="card-image">AI Studio</div>
+                        <div class="card-content">
+                            <div class="card-title">AI Creators Studio</div>
+                            <div class="card-tags">
+                                <span class="card-tag">#LP</span>
+                                <span class="card-tag">#テック</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-image">Food Del</div>
+                        <div class="card-content">
+                            <div class="card-title">Food Delivery</div>
+                            <div class="card-tags">
+                                <span class="card-tag">#LP</span>
+                                <span class="card-tag">#食品</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-image">Saize</div>
+                        <div class="card-content">
+                            <div class="card-title">Saize Marketing</div>
+                            <div class="card-tags">
+                                <span class="card-tag">#LP</span>
+                                <span class="card-tag">#食品</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-image">Healthy</div>
+                        <div class="card-content">
+                            <div class="card-title">Healthy Life</div>
+                            <div class="card-tags">
+                                <span class="card-tag">#LP</span>
+                                <span class="card-tag">#ヘルスケア</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #e8f4fd; border-radius: 8px;">
+        <h3>🎯 推奨案</h3>
+        <p><strong>案1（2列グリッド）</strong>がバランスが良いと思います：</p>
+        <ul>
+            <li>画像が十分大きくて見やすい</li>
+            <li>タップ領域も適切</li>
+            <li>6個のアイテムが3行で収まる</li>
+            <li>実装が簡単</li>
+        </ul>
+    </div>
+</body>
+</html>
