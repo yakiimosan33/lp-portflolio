@@ -324,31 +324,41 @@ body {
 /* Mobile Dropdown Styles */
 @media (max-width: 768px) {
     .dropdown-menu {
-        position: fixed;
-        top: 60px;
+        position: absolute;
+        top: calc(100% + 5px);
         left: 50%;
         transform: translateX(-50%);
-        width: 200px;
-        background: rgba(255, 255, 255, 0.95);
+        width: 180px;
+        background: rgba(255, 255, 255, 0.98);
         border: 1px solid rgba(0, 0, 0, 0.15);
         box-shadow: 0 6px 32px rgba(0, 0, 0, 0.15);
+        z-index: 10000;
     }
     
     .dropdown-trigger {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        padding: 0.3rem 0.8rem;
     }
     
     .dropdown-item {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
         text-align: center;
         color: #333;
+        white-space: nowrap;
     }
     
     .dropdown-item:hover {
         background: rgba(87, 157, 255, 0.08);
         color: var(--primary-color);
     }
+    
+    /* Ensure proper spacing in mobile header */
+    .header-nav-item.dropdown {
+        position: relative;
+        z-index: 10000;
+    }
+    
 }
 
 .nav-link::after {
