@@ -33,35 +33,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursor = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-dot-outline');
 
-    document.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-        cursor.style.left = `${posX}px`;
-        cursor.style.top = `${posY}px`;
-        cursorOutline.style.left = `${posX}px`;
-        cursorOutline.style.top = `${posY}px`;
-        if (cursor.style.opacity === '0') {
+    if (cursor && cursorOutline) {
+        document.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursor.style.left = `${posX}px`;
+            cursor.style.top = `${posY}px`;
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
             cursor.style.opacity = '1';
             cursorOutline.style.opacity = '1';
-        }
-    });
+        });
 
-    document.addEventListener('mouseleave', () => {
-        cursor.style.opacity = '0';
-        cursorOutline.style.opacity = '0';
-    });
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            cursorOutline.style.opacity = '0';
+        });
+    }
 
 
     // --- Initialize Tilt Effects ---
-    $('.portfolio-item').tilt({
-        maxTilt: 15,
-        perspective: 1400,
-        easing: "cubic-bezier(.03,.98,.52,.99)",
-        speed: 1200,
-        glare: true,
-        maxGlare: 0.3,
-        scale: 1.02
-    });
+    if (typeof $ !== 'undefined' && $.fn && $.fn.tilt) {
+        $('.portfolio-item').tilt({
+            maxTilt: 15,
+            perspective: 1400,
+            easing: "cubic-bezier(.03,.98,.52,.99)",
+            speed: 1200,
+            glare: true,
+            maxGlare: 0.3,
+            scale: 1.02
+        });
+    }
 
     // --- Image Loading Animation ---
     const portfolioImages = document.querySelectorAll('.portfolio-item img');
