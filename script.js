@@ -123,6 +123,70 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Initialize Slide Position ---
     updateSlidePosition();
 
+    // --- Mobile Carousel Indicators ---
+    function initMobileCarouselIndicators() {
+        if (window.innerWidth <= 480) {
+            // Show scroll indicators on mobile
+            document.querySelectorAll('.portfolio-scroll-indicators').forEach(indicator => {
+                indicator.style.display = 'flex';
+            });
+
+            // Add scroll event listeners to portfolio grids
+            document.querySelectorAll('.portfolio-grid').forEach((grid, gridIndex) => {
+                const indicators = grid.parentNode.querySelector('.portfolio-scroll-indicators');
+                if (!indicators) return;
+
+                const dots = indicators.querySelectorAll('.scroll-indicator-dot');
+                const items = grid.querySelectorAll('.portfolio-grid-item:not(.hidden)');
+                
+                // Update indicators based on scroll position
+                grid.addEventListener('scroll', () => {
+                    const scrollLeft = grid.scrollLeft;
+                    const itemWidth = grid.querySelector('.portfolio-grid-item').offsetWidth + 16; // item width + gap
+                    const currentIndex = Math.round(scrollLeft / itemWidth);
+                    
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                });
+            });
+        } else {
+            // Hide scroll indicators on desktop
+            document.querySelectorAll('.portfolio-scroll-indicators').forEach(indicator => {
+                indicator.style.display = 'none';
+            });
+        }
+    }
+
+    // Initialize carousel indicators
+    initMobileCarouselIndicators();
+
+    // Reinitialize on window resize
+    window.addEventListener('resize', initMobileCarouselIndicators);
+
+    // --- Mobile Touch Optimization for Portfolio Grids ---
+    function optimizeMobileTouch() {
+        if (window.innerWidth <= 480) {
+            document.querySelectorAll('.portfolio-grid').forEach(grid => {
+                // Prevent vertical scrolling on horizontal carousel
+                grid.addEventListener('touchmove', (e) => {
+                    // Only prevent if scrolling horizontally
+                    const touch = e.touches[0];
+                    if (grid.scrollWidth > grid.clientWidth) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+
+                // Add momentum scrolling for better iOS experience
+                grid.style.webkitOverflowScrolling = 'touch';
+            });
+        }
+    }
+
+    // Initialize touch optimization
+    optimizeMobileTouch();
+    window.addEventListener('resize', optimizeMobileTouch);
+
     // --- Hover effects for interactive elements ---
     document.querySelectorAll('a, button, .portfolio-item').forEach(el => {
         el.addEventListener('mouseenter', () => {

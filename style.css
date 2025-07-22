@@ -1038,18 +1038,30 @@ body {
     }
     
     .portfolio-grid {
-        grid-template-columns: 1fr 1fr;
+        display: flex;
         gap: 1rem;
         width: 95vw;
         padding: 0 0.5rem;
         max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+    
+    .portfolio-grid::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
     }
     
     .portfolio-grid-item {
+        flex: 0 0 280px;
         aspect-ratio: 4/3;
         height: auto;
-        min-height: 120px;
+        min-height: 150px;
         border-radius: 8px;
+        scroll-snap-align: start;
     }
     
     .portfolio-grid-overlay {
@@ -1078,11 +1090,44 @@ body {
     .filter-tags {
         gap: 0.5rem;
         margin-bottom: 2rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .filter-tags::-webkit-scrollbar {
+        display: none;
     }
     
     .filter-tag {
         font-size: 1rem;
         padding: 0.6rem 1.2rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    /* Scroll indicators for mobile carousel */
+    .portfolio-scroll-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 15px;
+    }
+    
+    .scroll-indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ddd;
+        transition: all 0.3s ease;
+    }
+    
+    .scroll-indicator-dot.active {
+        background: var(--primary-color);
+        transform: scale(1.2);
     }
     .portfolio-slide .slide__inner {
         height: auto;
