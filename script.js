@@ -1,18 +1,10 @@
-// Portfolio Variables
-let currentSlide = 0;
-let slides;
-let totalSlides;
-let currentSection = 'hero'; // 'hero', 'about', 'works', 'contact'
+// Simple navigation variables
+let currentSection = 'hero';
 
 // --- Combined DOMContentLoaded Listener ---
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize slides after DOM is ready
-    slides = document.querySelectorAll('.slide');
-    totalSlides = slides.length;
-    console.log('DOM loaded - Total slides:', totalSlides); // Debug log
-    
-    // Reset currentSlide to ensure proper initial state
-    currentSlide = 0;
+    // Initialize simple navigation
+    console.log('DOM loaded - Simple scroll initialized');
     
     // --- Loading Screen Logic ---
     const loadingScreen = document.getElementById('loading');
@@ -28,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Use imagesLoaded to wait for all portfolio images
-    imagesLoaded(document.querySelector('.scroll-content'), { background: true }, function() {
+    imagesLoaded(document.querySelector('.portfolio-container'), { background: true }, function() {
         console.log('All images have loaded.');
         hideLoadingScreen();
     });
@@ -37,38 +29,77 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(hideLoadingScreen, 3000);
 
     // --- Tag Filter Functionality ---
-    const filterButtons = document.querySelectorAll('.filter-tag');
-    const portfolioItems = document.querySelectorAll('.portfolio-grid-item');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filter = this.getAttribute('data-filter');
-            const category = this.closest('.filter-tags').getAttribute('data-category');
-            
-            // Update active button
-            this.closest('.filter-tags').querySelectorAll('.filter-tag').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            // Filter items
-            portfolioItems.forEach(item => {
-                // Only filter items in the same section
-                if (item.closest('.slide').querySelector(`.filter-tags[data-category="${category}"]`)) {
-                    if (filter === 'all') {
-                        item.classList.remove('hidden');
-                    } else {
+    function initializeFilters() {
+        const filterButtons = document.querySelectorAll('.filter-tag');
+        console.log('Found filter buttons:', filterButtons.length); // Debug log
+        
+        // Remove existing event listeners by cloning elements
+        filterButtons.forEach(button => {
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+        });
+        
+        // Add fresh event listeners
+        document.querySelectorAll('.filter-tag').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const filter = this.getAttribute('data-filter');
+                const category = this.closest('.filter-tags').getAttribute('data-category');
+                const currentSection = this.closest('.portfolio-section');
+                const currentGrid = currentSection.querySelector('.portfolio-grid');
+                const portfolioItems = currentSection.querySelectorAll('.portfolio-grid-item');
+                
+                console.log('Filter clicked:', filter, 'Category:', category); // Debug log
+                
+                // Update active button
+                this.closest('.filter-tags').querySelectorAll('.filter-tag').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Filter items within current section only
+                portfolioItems.forEach(item => {
+                    // Remove any existing hidden state first
+                    item.classList.remove('hidden');
+                    
+                    if (filter !== 'all') {
                         const tags = item.getAttribute('data-tags');
-                        if (tags && tags.includes(filter)) {
-                            item.classList.remove('hidden');
-                        } else {
+                        if (!tags || !tags.includes(filter)) {
                             item.classList.add('hidden');
                         }
                     }
-                }
+                });
+                
+                // Force a small delay to ensure DOM updates before updating button
+                setTimeout(() => {
+                    updateShowMoreButton(currentSection);
+                }, 10);
             });
         });
-    });
+    }
+    
+    // Initialize everything after DOM and images are ready
+    function initializeEverything() {
+        console.log('Initializing all functions...');
+        initializeFilters();
+        initializeShowMoreButtons();
+        
+        // Force update all sections
+        document.querySelectorAll('.portfolio-section').forEach(section => {
+            updateShowMoreButton(section);
+        });
+    }
+    
+    // Initialize on page load with multiple fallbacks
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initializeEverything, 100);
+        });
+    } else {
+        setTimeout(initializeEverything, 100);
+    }
 
 
     // --- Custom Cursor ---
@@ -120,75 +151,14 @@ document.addEventListener('DOMContentLoaded', function() {
         img.addEventListener('error', function() { console.error('Image failed to load:', this.src); });
     });
 
-    // --- Initialize Slide Position ---
-    updateSlidePosition();
+    // --- Initialize removed - using hybrid approach ---
 
-    // --- Mobile Carousel Indicators ---
-    function initMobileCarouselIndicators() {
-        if (window.innerWidth <= 480) {
-            // Show scroll indicators on mobile
-            document.querySelectorAll('.portfolio-scroll-indicators').forEach(indicator => {
-                indicator.style.display = 'flex';
-            });
+    // --- Mobile carousel indicators removed in hybrid approach ---
 
-            // Add scroll event listeners to portfolio grids
-            document.querySelectorAll('.portfolio-grid').forEach((grid, gridIndex) => {
-                const indicators = grid.parentNode.querySelector('.portfolio-scroll-indicators');
-                if (!indicators) return;
-
-                const dots = indicators.querySelectorAll('.scroll-indicator-dot');
-                const items = grid.querySelectorAll('.portfolio-grid-item:not(.hidden)');
-                
-                // Update indicators based on scroll position
-                grid.addEventListener('scroll', () => {
-                    const scrollLeft = grid.scrollLeft;
-                    const itemWidth = grid.querySelector('.portfolio-grid-item').offsetWidth + 16; // item width + gap
-                    const currentIndex = Math.round(scrollLeft / itemWidth);
-                    
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === currentIndex);
-                    });
-                });
-            });
-        } else {
-            // Hide scroll indicators on desktop
-            document.querySelectorAll('.portfolio-scroll-indicators').forEach(indicator => {
-                indicator.style.display = 'none';
-            });
-        }
-    }
-
-    // Initialize carousel indicators
-    initMobileCarouselIndicators();
-
-    // Reinitialize on window resize
-    window.addEventListener('resize', initMobileCarouselIndicators);
-
-    // --- Mobile Touch Optimization for Portfolio Grids ---
-    function optimizeMobileTouch() {
-        if (window.innerWidth <= 480) {
-            document.querySelectorAll('.portfolio-grid').forEach(grid => {
-                // Prevent vertical scrolling on horizontal carousel
-                grid.addEventListener('touchmove', (e) => {
-                    // Only prevent if scrolling horizontally
-                    const touch = e.touches[0];
-                    if (grid.scrollWidth > grid.clientWidth) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-
-                // Add momentum scrolling for better iOS experience
-                grid.style.webkitOverflowScrolling = 'touch';
-            });
-        }
-    }
-
-    // Initialize touch optimization
-    optimizeMobileTouch();
-    window.addEventListener('resize', optimizeMobileTouch);
+    // --- Touch optimization removed - using normal scroll in hybrid approach ---
 
     // --- Hover effects for interactive elements ---
-    document.querySelectorAll('a, button, .portfolio-item').forEach(el => {
+    document.querySelectorAll('a, button, .portfolio-grid-item').forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
             cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
@@ -211,41 +181,111 @@ document.addEventListener('DOMContentLoaded', function() {
         emailLink.textContent = `${user}@${domain}`;
     }
 
+    // --- Show More Button Functionality ---
+    function updateShowMoreButton(section) {
+        if (!section) return;
+        
+        const grid = section.querySelector('.portfolio-grid');
+        const showMoreBtn = section.querySelector('.show-more-btn');
+        
+        if (!grid || !showMoreBtn) {
+            console.log('Missing grid or button in updateShowMoreButton'); // Debug log
+            return;
+        }
+        
+        const allItems = Array.from(grid.querySelectorAll('.portfolio-grid-item'));
+        const visibleItems = allItems.filter(item => !item.classList.contains('hidden'));
+        
+        console.log('updateShowMoreButton - total items:', allItems.length, 'visible items:', visibleItems.length); // Debug log
+        
+        // Reset data-visible-index for all items
+        allItems.forEach(item => {
+            item.removeAttribute('data-visible-index');
+        });
+        
+        // Set visible index for visible items only
+        visibleItems.forEach((item, index) => {
+            item.setAttribute('data-visible-index', index + 1);
+            console.log(`Item ${index + 1}:`, item.querySelector('.grid-title')?.textContent || 'No title'); // Debug log
+        });
+        
+        // Reset expanded state when filtering
+        grid.classList.remove('expanded');
+        
+        // Show or hide button based on visible items count
+        if (visibleItems.length > 6) {
+            showMoreBtn.classList.add('visible');
+            showMoreBtn.style.display = 'block';
+            console.log('Show more button displayed'); // Debug log
+        } else {
+            showMoreBtn.classList.remove('visible');
+            showMoreBtn.style.display = 'none';
+            console.log('Show more button hidden'); // Debug log
+        }
+    }
+    
+    function initializeShowMoreButtons() {
+        console.log('Initializing show more buttons'); // Debug log
+        document.querySelectorAll('.portfolio-section').forEach(section => {
+            const grid = section.querySelector('.portfolio-grid');
+            const showMoreBtn = section.querySelector('.show-more-btn');
+            
+            if (!grid || !showMoreBtn) {
+                console.log('Missing grid or button in section'); // Debug log
+                return;
+            }
+            
+            // Initial setup
+            updateShowMoreButton(section);
+            
+            // Remove existing event listener by cloning
+            const newBtn = showMoreBtn.cloneNode(true);
+            showMoreBtn.parentNode.replaceChild(newBtn, showMoreBtn);
+            
+            // Add fresh event listener
+            newBtn.addEventListener('click', function() {
+                console.log('Show more button clicked'); // Debug log
+                grid.classList.add('expanded');
+                this.style.display = 'none';
+                
+                // Smooth scroll to show new items
+                setTimeout(() => {
+                    const visibleItems = Array.from(grid.querySelectorAll('.portfolio-grid-item:not(.hidden)'));
+                    const seventhItem = visibleItems[6];
+                    if (seventhItem) {
+                        scrollToSection(seventhItem, 120);
+                        console.log('Scrolling to 7th item');
+                    }
+                }, 200);
+            });
+        });
+    }
+    
+    // Show more buttons initialized above
+
     // --- Navigation Menu Functionality ---
-    // Function to navigate to a specific section
+    // Simplified navigation to sections
     function navigateToSection(sectionName) {
-        console.log('navigateToSection called with:', sectionName, 'window.innerWidth:', window.innerWidth); // Debug log
+        console.log('navigateToSection called with:', sectionName);
         
         if (sectionName === 'works') {
-            // On mobile, go directly to LP section (first portfolio slide)
-            if (window.innerWidth <= 768) {
-                currentSlide = 1; // LP（ランディングページ）slide - first portfolio section
-            } else {
-                currentSlide = 0; // Start from hero on desktop, can scroll to see portfolio
-            }
-            console.log('Navigating to works, currentSlide set to:', currentSlide); // Debug log
-            updateSlidePosition();
+            const worksSection = document.getElementById('works');
+            scrollToSection(worksSection, 100);
         } else {
-            currentSlide = 0; // Hero slide
-            updateSlidePosition();
+            // Navigate to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            console.log('Scrolling to top');
         }
     }
 
     // Check if we came from another page with a hash
     if (window.location.hash) {
         const hash = window.location.hash.replace('#', '');
-        console.log('Page loaded with hash:', hash); // Debug log
-        // Wait for images to load and transitions to complete
+        console.log('Page loaded with hash:', hash);
+        // Wait for images to load
         setTimeout(() => {
-            console.log('Executing hash navigation after 300ms delay'); // Debug log
             navigateToSection(hash);
-            // Ensure the view is updated
-            if (window.scrollTo) {
-                window.scrollTo(0, 0);
-            }
         }, 300);
-    } else {
-        console.log('Page loaded without hash'); // Debug log
     }
 
     // Add click event listeners to internal navigation links
@@ -256,12 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionName = href.replace('#', '');
             console.log('Click event - sectionName:', sectionName, 'href:', href); // Debug log
             
-            // Force reset currentSlide before navigation for mobile
-            if (window.innerWidth <= 768 && sectionName === 'works') {
-                console.log('Mobile works click - forcing currentSlide reset'); // Debug log
-                currentSlide = 0; // Reset to ensure clean state
-            }
-            
+            // Navigate to section using new hybrid approach
             navigateToSection(sectionName);
             // Update URL hash without triggering scroll
             history.pushState(null, null, href);
@@ -269,100 +304,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// --- Page Visibility Handler ---
-document.addEventListener('visibilitychange', function() {
-    if (!document.hidden) {
-        console.log('Page became visible - resetting slide state'); // Debug log
-        // Reset to ensure clean state when page becomes visible
-        if (window.innerWidth <= 768 && window.location.hash === '#works') {
-            currentSlide = 0;
-            setTimeout(() => {
-                navigateToSection('works');
-            }, 100);
-        }
-    }
-});
+// --- Page Visibility Handler (removed for hybrid approach) ---
 
-// --- Scrolling and Navigation ---
-let isScrolling = false;
-
-function updateSlidePosition() {
-    const scrollContent = document.querySelector('.scroll-content');
-    if (!scrollContent) return;
-    
-    // Get all slides to verify count
-    const allSlides = document.querySelectorAll('.slide');
-    console.log('Total slides found:', allSlides.length, 'currentSlide:', currentSlide); // Debug log
-    
-    // Force a reflow to ensure proper rendering on mobile
-    scrollContent.style.transition = 'none';
-    void scrollContent.offsetHeight; // Trigger reflow
-    
-    const translateY = -(currentSlide * 100);
-    console.log('updateSlidePosition - currentSlide:', currentSlide, 'translateY:', translateY, 'vh'); // Debug log
-    
-    // Log which slide should be visible
-    if (allSlides[currentSlide]) {
-        const slideInfo = allSlides[currentSlide].querySelector('.portfolio-section-title');
-        console.log('Current slide should show:', slideInfo ? slideInfo.textContent : 'Hero slide');
-    }
-    
-    scrollContent.style.transform = `translateY(${translateY}vh)`;
-    
-    // Re-enable transitions after a brief delay
-    setTimeout(() => {
-        scrollContent.style.transition = '';
-    }, 50);
-
-    const scrollbarHandle = document.querySelector('.scrollbar__handle');
-    if (!scrollbarHandle) return;
-    const progress = totalSlides > 1 ? currentSlide / (totalSlides - 1) : 0;
-    scrollbarHandle.style.height = `${progress * 100}%`;
-
-    // Change color at the end
-    if (currentSlide === totalSlides - 1) {
-        scrollbarHandle.classList.add('scrollbar__handle--end');
-    } else {
-        scrollbarHandle.classList.remove('scrollbar__handle--end');
+// --- Simple Navigation Functions ---
+// Simple smooth scroll to section
+function scrollToSection(targetElement, offset = 80) {
+    if (targetElement) {
+        const targetPosition = targetElement.offsetTop - offset;
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+        console.log('Scrolling to position:', targetPosition);
     }
 }
 
-function navigate(direction) {
-    if (isScrolling) return;
-    isScrolling = true;
-
-    const oldSlide = currentSlide;
-    if (direction === 'next' && currentSlide < totalSlides - 1) {
-        currentSlide++;
-    } else if (direction === 'prev' && currentSlide > 0) {
-        currentSlide--;
-    }
-
-    if (oldSlide !== currentSlide) {
-        updateSlidePosition();
-    }
-
-    setTimeout(() => { isScrolling = false; }, 1000); // Cooldown period
-}
-
-// Event Listeners for Navigation
-document.addEventListener('wheel', (e) => navigate(e.deltaY > 0 ? 'next' : 'prev'));
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate('next');
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate('prev');
-});
-
-let touchStartY = 0;
-document.addEventListener('touchstart', (e) => { touchStartY = e.changedTouches[0].screenY; });
-document.addEventListener('touchend', (e) => {
-    const touchEndY = e.changedTouches[0].screenY;
-    const swipeThreshold = 50;
-    if (touchStartY - touchEndY > swipeThreshold) {
-        navigate('next');
-    } else if (touchEndY - touchStartY > swipeThreshold) {
-        navigate('prev');
-    }
-});
+// Make scrollToSection available globally
+window.scrollToSection = scrollToSection;
 
 // Dropdown Menu Functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -405,21 +363,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function navigateToWorksCategory(category) {
-    // Navigate to works section first
+    console.log('navigateToWorksCategory called with:', category); // Debug log
+    let targetSection;
+    
     if (category === 'website') {
-        currentSlide = 1; // Webサイト slide
+        targetSection = document.getElementById('website-section');
     } else if (category === 'webapp') {
-        currentSlide = 2; // Webアプリ slide  
+        targetSection = document.getElementById('webapp-section');
     }
     
-    updateSlidePosition();
-    currentSection = 'works';
+    console.log('Target section found:', targetSection); // Debug log
     
-    // Update active filter after navigation
-    setTimeout(() => {
-        const targetSlide = slides[currentSlide];
-        if (targetSlide) {
-            const filterTags = targetSlide.querySelectorAll('.filter-tag');
+    if (targetSection) {
+        scrollToSection(targetSection, 100);
+        console.log('Navigating to', category);
+        
+        // Update active filter after navigation
+        setTimeout(() => {
+            const filterTags = targetSection.querySelectorAll('.filter-tag');
             filterTags.forEach(tag => {
                 tag.classList.remove('active');
                 if (tag.getAttribute('data-filter') === 'all') {
@@ -427,15 +388,17 @@ function navigateToWorksCategory(category) {
                 }
             });
             
-            // Show all items by default, but limit to 4 on mobile
-            const portfolioItems = targetSlide.querySelectorAll('.portfolio-grid-item');
-            portfolioItems.forEach((item, index) => {
-                if (window.innerWidth <= 480 && index >= 4) {
-                    item.style.display = 'none';
-                } else {
-                    item.style.display = 'block';
-                }
+            // Reset any filters
+            const portfolioItems = targetSection.querySelectorAll('.portfolio-grid-item');
+            portfolioItems.forEach(item => {
+                item.classList.remove('hidden');
             });
-        }
-    }, 300);
+            
+            // Update show more button
+            updateShowMoreButton(targetSection);
+        }, 300);
+    }
 }
+
+// Make function available globally
+window.navigateToWorksCategory = navigateToWorksCategory;

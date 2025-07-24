@@ -43,8 +43,8 @@
                 <li class="header-nav-item dropdown">
                     <a href="#works" class="nav-link dropdown-trigger">WORKS ▼</a>
                     <div class="dropdown-menu">
-                        <a href="#works" class="dropdown-item" data-category="website">Webサイト</a>
-                        <a href="#works" class="dropdown-item" data-category="webapp">Webアプリ</a>
+                        <a href="#" class="dropdown-item" data-category="website">Webサイト</a>
+                        <a href="#" class="dropdown-item" data-category="webapp">Webアプリ</a>
                     </div>
                 </li>
                 <li class="header-nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -56,33 +56,34 @@
 
     <!-- Main Container -->
     <div class="main-container">
-        <div class="scroll-container">
-            <div class="scroll-content">
-                <!-- Hero Slide -->
-                <div class="slide slide--first slide-hero">
-                    <div class="slide__inner">
-                        <h1 class="slide__title">Creative with AI</h1>
-                        <p class="slide__portfolio-text">VIBE CODING'S PORTFOLIO SITE.</p>
-                        <p class="slide__subtitle">
-                            やきいも/AI Creator
-                        </p>
-                    </div>
-                    <!-- Scroll Indicator -->
-                    <div class="scroll-indicator">
-                        <span class="scroll-text">SCROLL</span>
-                        <div class="scroll-arrow"></div>
-                    </div>
-                </div>
+        <!-- Hero Section -->
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Creative with AI</h1>
+                <p class="hero-portfolio-text">VIBE CODING'S PORTFOLIO SITE.</p>
+                <p class="hero-subtitle">
+                    やきいも/AI Creator
+                </p>
+            </div>
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" onclick="navigateToSection('works')">
+                <span class="scroll-text">SCROLL</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
 
-                <!-- Webサイト Grid Slide -->
-                <div class="slide portfolio-grid-slide" id="works">
-                    <div class="slide__inner">
+        <!-- Portfolio Section with Normal Scroll -->
+        <div class="portfolio-container" id="works">
+            <!-- Webサイト Section -->
+            <section class="portfolio-section" id="website-section">
+                <div class="portfolio-section-inner">
                         <h2 class="portfolio-section-title">Webサイト</h2>
                         <!-- Filter Tags -->
                         <div class="filter-tags" data-category="website">
                             <button class="filter-tag active" data-filter="all">すべて</button>
                             <button class="filter-tag" data-filter="lp">#LP</button>
                             <button class="filter-tag" data-filter="store">#店舗サイト</button>
+                            <button class="filter-tag" data-filter="artist">#アーティスト</button>
                         </div>
                         <div class="portfolio-grid">
                             <a href="https://lp-gemini-basic.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="lp tech">
@@ -139,13 +140,33 @@
                                     </div>
                                 </div>
                             </a>
+                            <a href="https://band-ivory.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="artist music">
+                                <img src="pic/band-artist.png" alt="Band Artist Site">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-title">Band Artist Site</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#アーティスト</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://singer-girl.vercel.app/" target="_blank" rel="noopener noreferrer" class="portfolio-grid-item" data-tags="artist music">
+                                <img src="pic/music-girl.png" alt="Mika Sato Artist Site">
+                                <div class="portfolio-grid-overlay">
+                                    <span class="grid-title">Mika Sato</span>
+                                    <div class="grid-tags">
+                                        <span class="tag">#アーティスト</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- もっと見るボタン -->
+                            <button class="show-more-btn" aria-label="もっと見る">もっと見る</button>
                         </div>
-                    </div>
                 </div>
+            </section>
 
-                <!-- Webアプリ Grid Slide -->
-                <div class="slide portfolio-grid-slide">
-                    <div class="slide__inner">
+            <!-- Webアプリ Section -->
+            <section class="portfolio-section" id="webapp-section">
+                <div class="portfolio-section-inner">
                         <h2 class="portfolio-section-title">Webアプリ</h2>
                         <!-- Filter Tags -->
                         <div class="filter-tags" data-category="webapp">
@@ -202,11 +223,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- もっと見るボタン -->
+                            <button class="show-more-btn" aria-label="もっと見る">もっと見る</button>
                         </div>
-                    </div>
                 </div>
+            </section>
+        </div>
+    </div>
 
-                <!-- 将来的な3分類目の追加用プレースホルダー -->
+    <!-- 将来的な3分類目の追加用プレースホルダー -->
                 <!-- 
                 <div class="slide portfolio-grid-slide">
                     <div class="slide__inner">
@@ -224,10 +249,7 @@
             </div>
         </div>
 
-        <!-- Scrollbar -->
-        <div class="scrollbar">
-            <div class="scrollbar__handle"></div>
-        </div>
+        <!-- Scrollbar removed - not needed in hybrid approach -->
     </div>
 
     <!-- Scripts -->
