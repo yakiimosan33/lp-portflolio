@@ -272,6 +272,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (sectionName === 'works') {
             const worksSection = document.getElementById('works');
             scrollToSection(worksSection, 100);
+        } else if (sectionName === 'website-section') {
+            const websiteSection = document.getElementById('website-section');
+            scrollToSection(websiteSection, 100);
+        } else if (sectionName === 'webapp-section') {
+            const webappSection = document.getElementById('webapp-section');
+            scrollToSection(webappSection, 100);
         } else {
             // Navigate to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -289,8 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // Add click event listeners to internal navigation links
-    document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+    // Add click event listeners to internal navigation links (exclude dropdown elements)
+    document.querySelectorAll('.nav-link[href^="#"]:not(.dropdown-trigger)').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const href = e.target.getAttribute('href');
@@ -339,9 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle dropdown item selection
     dropdownItems.forEach(item => {
         item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const category = this.getAttribute('data-category');
-            navigateToWorksCategory(category);
+            // Don't prevent default - let the anchor link work
             
             // Close dropdown after selection
             dropdown.classList.remove('open');
