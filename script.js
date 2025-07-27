@@ -209,18 +209,19 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Item ${index + 1}:`, item.querySelector('.grid-title')?.textContent || 'No title'); // Debug log
         });
         
-        // Reset expanded state when filtering
-        grid.classList.remove('expanded');
-        
-        // Show or hide button based on visible items count
+        // Only reset expanded state when filtering if we have more than 6 items
+        // If 6 or fewer items, keep expanded to show all
         if (visibleItems.length > 6) {
+            grid.classList.remove('expanded');
             showMoreBtn.classList.add('visible');
             showMoreBtn.style.display = 'block';
             console.log('Show more button displayed'); // Debug log
         } else {
+            // 6 items or fewer - expand grid and hide button to show all items
+            grid.classList.add('expanded');
             showMoreBtn.classList.remove('visible');
             showMoreBtn.style.display = 'none';
-            console.log('Show more button hidden'); // Debug log
+            console.log('Show more button hidden - showing all items'); // Debug log
         }
     }
     
