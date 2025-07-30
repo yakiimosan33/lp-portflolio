@@ -209,19 +209,28 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Item ${index + 1}:`, item.querySelector('.grid-title')?.textContent || 'No title'); // Debug log
         });
         
-        // Only reset expanded state when filtering if we have more than 6 items
-        // If 6 or fewer items, keep expanded to show all
-        if (visibleItems.length > 6) {
+        // モバイル判定による表示制限
+        const isMobile = window.innerWidth <= 480;
+        const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
+        let maxItems = 6; // デスクトップのデフォルト
+        
+        if (isMobile) {
+            maxItems = 3; // スマホでは3アイテムまで
+        } else if (isTablet) {
+            maxItems = 4; // タブレットでは4アイテムまで
+        }
+        
+        if (visibleItems.length > maxItems) {
             grid.classList.remove('expanded');
             showMoreBtn.classList.add('visible');
             showMoreBtn.style.display = 'block';
             console.log('Show more button displayed'); // Debug log
         } else {
-            // 6 items or fewer - expand grid and hide button to show all items
+            // 表示制限以下のアイテム数 - グリッドを展開してボタンを非表示
             grid.classList.add('expanded');
             showMoreBtn.classList.remove('visible');
             showMoreBtn.style.display = 'none';
-            console.log('Show more button hidden - showing all items'); // Debug log
+            console.log(`Show more button hidden - showing all ${visibleItems.length} items`); // Debug log
         }
     }
     
@@ -252,10 +261,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Smooth scroll to show new items
                 setTimeout(() => {
                     const visibleItems = Array.from(grid.querySelectorAll('.portfolio-grid-item:not(.hidden)'));
-                    const seventhItem = visibleItems[6];
-                    if (seventhItem) {
-                        scrollToSection(seventhItem, 120);
-                        console.log('Scrolling to 7th item');
+                    const isMobile = window.innerWidth <= 480;
+                    const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
+                    
+                    let scrollToIndex = 6; // デスクトップのデフォルト（7番目のアイテム）
+                    if (isMobile) {
+                        scrollToIndex = 3; // スマホでは4番目のアイテム
+                    } else if (isTablet) {
+                        scrollToIndex = 4; // タブレットでは5番目のアイテム
+                    }
+                    
+                    const targetItem = visibleItems[scrollToIndex];
+                    if (targetItem) {
+                        scrollToSection(targetItem, 120);
+                        console.log(`Scrolling to item ${scrollToIndex + 1}`);
                     }
                 }, 200);
             });

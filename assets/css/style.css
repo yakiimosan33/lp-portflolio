@@ -1174,6 +1174,20 @@ body {
         gap: 1.5rem;
     }
     
+    /* モバイルでは4アイテムまで表示 */
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="5"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="6"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="7"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="8"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="9"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="10"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="11"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="12"] {
+        display: none !important;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
     /* 古いスライド用（削除予定） */
     .portfolio-grid-slide {
         padding-top: 14rem;
@@ -1348,6 +1362,21 @@ body {
         min-height: 200px;
         border-radius: 8px;
         width: 100%;
+    }
+    
+    /* スマホでは3アイテムまで表示 */
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="4"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="5"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="6"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="7"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="8"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="9"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="10"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="11"],
+    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="12"] {
+        display: none !important;
+        opacity: 0;
+        transform: translateY(20px);
     }
     
     .portfolio-grid-overlay {
