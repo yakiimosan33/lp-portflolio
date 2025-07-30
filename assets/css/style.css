@@ -1170,7 +1170,7 @@ body {
     }
     
     .portfolio-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
@@ -1238,7 +1238,7 @@ body {
     }
     .portfolio-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
         width: 95vw;
         padding: 0 1rem;
@@ -1328,7 +1328,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    @media (max-width: 480px) {
     .slide {
         padding: 0 4vw;
         display: flex;
@@ -1438,17 +1437,17 @@ body {
         font-size: 1.3rem;
     }
     .portfolio-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.8rem;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
         width: 98vw;
         max-height: none;
         overflow-y: visible;
     }
     
     .portfolio-grid-item {
-        aspect-ratio: 4/3;
-        height: auto;
-        min-height: 100px;
+        height: 25vh;
+        min-height: 200px;
+        max-height: 300px;
     }
     .portfolio-grid-overlay {
         padding: 1rem;
