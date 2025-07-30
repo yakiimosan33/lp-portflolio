@@ -789,6 +789,8 @@ body {
     align-items: center;
     justify-content: center;
     cursor: default;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .portfolio-placeholder:hover {
@@ -1283,7 +1285,24 @@ body {
         line-height: 1.2;
     }
     .placeholder-text {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+    
+    .placeholder-subtext {
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+    }
+    
+    /* タブレット用プレースホルダー調整 */
+    .portfolio-placeholder {
+        padding: 0.8rem;
+        border-width: 1.5px;
+    }
+    
+    .portfolio-placeholder .grid-tags {
+        margin-top: 1rem;
+        gap: 0.3rem;
     }
     .contact-content {
         padding: 0 2rem;
@@ -1522,12 +1541,32 @@ body {
     }
     
     .placeholder-text {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        line-height: 1.3;
     }
     
     .placeholder-subtext {
-        font-size: 1rem;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
     }
+    
+    /* プレースホルダーのタグサイズ調整 */
+    .portfolio-placeholder .tag {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.4rem;
+    }
+    
+    /* プレースホルダーのパディング調整 */
+    .portfolio-placeholder {
+        padding: 0.5rem;
+        border-width: 1px;
+    }
+    
+    .portfolio-placeholder .grid-tags {
+        margin-top: 0.8rem;
+        gap: 0.2rem;
+    }
+    
     .contact-link {
         font-size: 1.4rem;
         padding: 1rem 2rem;
