@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 portfolioItems.forEach(item => {
                     // Remove any existing hidden state first
                     item.classList.remove('hidden');
+                    item.removeAttribute('data-visible-index');
                     
                     if (filter !== 'all') {
                         const tags = item.getAttribute('data-tags');
@@ -181,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         emailLink.textContent = `${user}@${domain}`;
     }
 
-    // --- Show More Button Functionality ---
+    // --- Show More Button Functionality (Simplified) ---
     function updateShowMoreButton(section) {
         if (!section) return;
         
@@ -189,48 +190,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const showMoreBtn = section.querySelector('.show-more-btn');
         
         if (!grid || !showMoreBtn) {
-            console.log('Missing grid or button in updateShowMoreButton'); // Debug log
             return;
         }
         
-        const allItems = Array.from(grid.querySelectorAll('.portfolio-grid-item'));
-        const visibleItems = allItems.filter(item => !item.classList.contains('hidden'));
+        const visibleItems = Array.from(grid.querySelectorAll('.portfolio-grid-item:not(.hidden)'));
         
-        console.log('updateShowMoreButton - total items:', allItems.length, 'visible items:', visibleItems.length); // Debug log
-        
-        // Reset data-visible-index for all items
-        allItems.forEach(item => {
-            item.removeAttribute('data-visible-index');
-        });
-        
-        // Set visible index for visible items only
-        visibleItems.forEach((item, index) => {
-            item.setAttribute('data-visible-index', index + 1);
-            console.log(`Item ${index + 1}:`, item.querySelector('.grid-title')?.textContent || 'No title'); // Debug log
-        });
-        
-        // モバイル判定による表示制限
-        const isMobile = window.innerWidth <= 480;
-        const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
-        let maxItems = 6; // デスクトップのデフォルト
-        
-        if (isMobile) {
-            maxItems = 3; // スマホでは3アイテムまで
-        } else if (isTablet) {
-            maxItems = 4; // タブレットでは4アイテムまで
-        }
+        // シンプルな表示制限（6個まで）
+        const maxItems = 6;
         
         if (visibleItems.length > maxItems) {
-            grid.classList.remove('expanded');
-            showMoreBtn.classList.add('visible');
-            showMoreBtn.style.display = 'block';
-            console.log('Show more button displayed'); // Debug log
+            // 6個を超える場合のみ「もっと見る」ボタンを表示
+            visibleItems.forEach((item, index) => {
+                if (index >= maxItems && !grid.classList.contains('expanded')) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'flex';
+                }
+            });
+            
+            if (!grid.classList.contains('expanded')) {
+                showMoreBtn.style.display = 'block';
+            } else {
+                showMoreBtn.style.display = 'none';
+            }
         } else {
-            // 表示制限以下のアイテム数 - グリッドを展開してボタンを非表示
-            grid.classList.add('expanded');
-            showMoreBtn.classList.remove('visible');
+            // 6個以下の場合は全て表示
+            visibleItems.forEach(item => {
+                item.style.display = 'flex';
+            });
             showMoreBtn.style.display = 'none';
-            console.log(`Show more button hidden - showing all ${visibleItems.length} items`); // Debug log
         }
     }
     
@@ -254,29 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add fresh event listener
             newBtn.addEventListener('click', function() {
-                console.log('Show more button clicked'); // Debug log
                 grid.classList.add('expanded');
-                this.style.display = 'none';
-                
-                // Smooth scroll to show new items
-                setTimeout(() => {
-                    const visibleItems = Array.from(grid.querySelectorAll('.portfolio-grid-item:not(.hidden)'));
-                    const isMobile = window.innerWidth <= 480;
-                    const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
-                    
-                    let scrollToIndex = 6; // デスクトップのデフォルト（7番目のアイテム）
-                    if (isMobile) {
-                        scrollToIndex = 3; // スマホでは4番目のアイテム
-                    } else if (isTablet) {
-                        scrollToIndex = 4; // タブレットでは5番目のアイテム
-                    }
-                    
-                    const targetItem = visibleItems[scrollToIndex];
-                    if (targetItem) {
-                        scrollToSection(targetItem, 120);
-                        console.log(`Scrolling to item ${scrollToIndex + 1}`);
-                    }
-                }, 200);
+                updateShowMoreButton(section);
             });
         });
     }

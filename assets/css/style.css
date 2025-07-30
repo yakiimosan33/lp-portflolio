@@ -635,48 +635,20 @@ body {
 }
 
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 1rem 0;
     justify-content: center;
-}
-
-/* visible-index が7以上のアイテムを初期状態で非表示 */
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index]:nth-child(n+7) {
-    display: none !important;
-}
-
-/* より具体的な指定 */
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="7"],
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="8"],
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="9"],
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="10"],
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="11"],
-.portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="12"] {
-    display: none !important;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* 展開時の表示 */
-.portfolio-grid.expanded .portfolio-grid-item[data-visible-index] {
-    display: block !important;
-    animation: fadeInUp 0.4s ease forwards;
+    align-items: stretch;
 }
 
 /* hiddenクラスは常に非表示（最優先） */
 .portfolio-grid-item.hidden {
     display: none !important;
-    opacity: 0;
-}
-
-/* visible-indexが設定されていて、hiddenでないアイテムの表示 */
-.portfolio-grid-item[data-visible-index]:not(.hidden) {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 @keyframes fadeInUp {
@@ -688,7 +660,7 @@ body {
 
 /* もっと見るボタン */
 .show-more-btn {
-    grid-column: 1 / -1; /* グリッド全幅に配置 */
+    flex: 0 0 100%; /* Flexboxで全幅に配置 */
     width: fit-content; /* ボタン自体は内容に合わせたサイズ */
     max-width: 300px; /* 最大幅を制限 */
     margin: 2rem auto 0; /* 水平中央揃え */
@@ -703,7 +675,6 @@ body {
     transition: all 0.3s ease;
     display: none;
     text-align: center;
-    justify-self: center; /* グリッドアイテムとしても中央揃え */
 }
 
 .show-more-btn.visible {
@@ -723,7 +694,9 @@ body {
 
 .portfolio-grid-item {
     position: relative;
-    width: 100%;
+    flex: 0 0 auto;
+    width: 350px;
+    max-width: 400px;
     height: 25vh;
     min-height: 250px;
     overflow: hidden;
@@ -731,6 +704,7 @@ body {
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     text-decoration: none;
+    background-color: #f8f9fa;
     /* タッチデバイス対応 */
     -webkit-tap-highlight-color: rgba(0, 87, 255, 0.2);
     touch-action: manipulation;
@@ -745,7 +719,8 @@ body {
 .portfolio-grid-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -786,9 +761,6 @@ body {
 .portfolio-placeholder {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     border: 2px dashed var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: default;
     padding: 1rem;
     box-sizing: border-box;
@@ -801,7 +773,13 @@ body {
 }
 
 .placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    height: 100%;
+    width: 100%;
 }
 
 .placeholder-text {
@@ -1173,23 +1151,11 @@ body {
     }
     
     .portfolio-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
     }
     
-    /* モバイルでは4アイテムまで表示 */
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="5"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="6"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="7"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="8"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="9"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="10"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="11"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="12"] {
-        display: none !important;
-        opacity: 0;
-        transform: translateY(20px);
-    }
     
     /* 古いスライド用（削除予定） */
     .portfolio-grid-slide {
@@ -1254,21 +1220,19 @@ body {
         font-size: 1.4rem;
     }
     .portfolio-grid {
-        display: grid;
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
         width: 95vw;
         padding: 0 1rem;
-        overflow-x: visible;
-        overflow-y: visible;
-        scroll-snap-type: none;
     }
     .portfolio-grid-wrapper {
         width: 95vw;
     }
     .portfolio-grid-item {
-        flex: none;
+        flex: 0 0 auto;
         width: 100%;
+        max-width: 100%;
         height: 30vh;
         min-height: 180px;
         border-radius: 8px;
@@ -1370,34 +1334,22 @@ body {
     }
     
     .portfolio-grid {
-        display: grid;
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
         width: 95vw;
         padding: 0 0.5rem;
     }
     
     .portfolio-grid-item {
+        flex: 0 0 auto;
         height: 25vh;
         min-height: 200px;
         border-radius: 8px;
         width: 100%;
+        max-width: 100%;
     }
     
-    /* スマホでは3アイテムまで表示 */
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="4"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="5"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="6"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="7"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="8"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="9"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="10"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="11"],
-    .portfolio-grid:not(.expanded) .portfolio-grid-item[data-visible-index="12"] {
-        display: none !important;
-        opacity: 0;
-        transform: translateY(20px);
-    }
     
     .portfolio-grid-overlay {
         padding: 0.5rem;
@@ -1518,14 +1470,16 @@ body {
         font-size: 1.3rem;
     }
     .portfolio-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
         gap: 1.2rem;
         width: 98vw;
-        max-height: none;
-        overflow-y: visible;
     }
     
     .portfolio-grid-item {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
         height: 25vh;
         min-height: 200px;
         max-height: 300px;
