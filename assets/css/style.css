@@ -1628,6 +1628,88 @@ body {
     }
 }
 
+/* Others Page Specific Styles */
+.others-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #003dcc 100%);
+    color: white;
+}
+
+.others-hero .hero-title {
+    color: white;
+}
+
+.others-hero .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.others-hero .hero-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.others-grid {
+    min-height: 60vh;
+}
+
+.others-cta {
+    text-align: center;
+    margin-top: 6rem;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 1rem;
+}
+
+.cta-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.cta-text {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 87, 255, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 87, 255, 0.3);
+    background: #0047d1;
+}
+
+/* Grid Author Style */
+.grid-author {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
 /* Mobile responsive for scroll indicator */
 @media (max-width: 768px) {
     .scroll-indicator {
@@ -1638,5 +1720,22 @@ body {
     }
     .scroll-arrow {
         height: 20px;
+    }
+    
+    .others-hero .hero-description {
+        font-size: 1.2rem;
+    }
+    
+    .others-cta {
+        margin-top: 4rem;
+        padding: 3rem 1.5rem;
+    }
+    
+    .cta-title {
+        font-size: 2rem;
+    }
+    
+    .cta-text {
+        font-size: 1.4rem;
     }
 }
